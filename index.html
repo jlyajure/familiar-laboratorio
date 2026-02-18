@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Familia Yajure - Recuerdos</title>
+    <title>Familia Yajure - Oficial V20</title>
     <link rel="icon" type="image/png" href="https://img.icons8.com/emoji/192/house-with-garden.png">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
@@ -12,91 +12,83 @@
         :root { --accent-blue: #3b82f6; --dark-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); }
         body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; min-height: 100vh; background: var(--dark-bg); background-attachment: fixed; color: #f8fafc; overflow-x: hidden; }
         
-        /* LOGIN */
-        #login-screen { position: fixed; inset: 0; background: #0f172a; display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        .login-card { background: rgba(255,255,255,0.05); padding: 40px; border-radius: 30px; text-align: center; width: 90%; max-width: 350px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        #passInput { width: 100%; padding: 15px; border-radius: 15px; border: none; text-align: center; margin-top: 20px; font-size: 18px; font-weight: 700; }
+        /* LOGIN CON FOTO RESTAURADA */
+        #login-screen { position: fixed; inset: 0; background: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover; display: flex; align-items: flex-start; justify-content: center; z-index: 1000; padding-top: 100px; }
+        #login-screen::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+        .login-card { position: relative; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 35px; text-align: center; width: 90%; max-width: 350px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        #passInput { width: 100%; padding: 18px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; text-align: center; font-size: 18px; outline: none; margin-top: 20px; }
 
-        /* APP */
-        #app-content { display: none; padding-bottom: 50px; }
+        /* APP CONTENT */
+        #app-content { display: none; }
         header { background: rgba(15, 23, 42, 0.95); padding: 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .container { max-width: 500px; margin: auto; padding: 15px; }
+        .container { max-width: 500px; margin: auto; padding: 20px; }
 
-        /* FILTROS (RESTAURADOS Y SIN TEMBLORES) */
-        .filter-scroll { overflow-x: auto; white-space: nowrap; padding: 10px 0 20px; margin-bottom: 10px; }
+        /* FILTROS */
+        .filter-scroll { overflow-x: auto; white-space: nowrap; padding-bottom: 15px; margin-bottom: 20px; }
         .filter-scroll::-webkit-scrollbar { display: none; }
-        .filter-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 12px 22px; border-radius: 25px; margin-right: 10px; font-size: 14px; cursor: pointer; font-weight: 600; transition: 0.2s; }
-        .filter-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); font-weight: 800; transform: scale(1.05); }
+        .filter-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 12px 20px; border-radius: 25px; margin-right: 10px; font-size: 14px; cursor: pointer; font-weight: 600; display: inline-block; }
+        .filter-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); font-weight: 800; }
 
-        /* PANEL DE SUBIDA */
-        .upload-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 30px; border: 2px dashed rgba(255,255,255,0.2); margin-bottom: 30px; text-align: center; }
-        .category-select { width: 100%; padding: 15px; border-radius: 15px; background: white; color: #0f172a; font-weight: 800; border: none; margin-bottom: 15px; font-size: 14px; }
-        .btn-upload { background: var(--accent-blue); color: white; width: 100%; padding: 18px; border-radius: 20px; font-weight: 800; border: none; cursor: pointer; font-size: 15px; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
+        /* SUBIDA */
+        .upload-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 30px; border: 2px dashed rgba(255,255,255,0.2); margin-bottom: 30px; }
+        .category-select { width: 100%; padding: 15px; border-radius: 15px; background: white; color: #0f172a; font-weight: 800; border: none; margin-bottom: 15px; }
+        .btn-upload { background: var(--accent-blue); color: white; width: 100%; padding: 18px; border-radius: 20px; font-weight: 800; border: none; cursor: pointer; }
 
-        #status-msg { text-align: center; font-size: 13px; color: #93c5fd; margin-bottom: 15px; font-weight: 800; }
-
-        /* POSTS Y CARRUSEL */
-        .post { background: white; border-radius: 30px; padding: 20px; margin-bottom: 30px; color: #1e293b; box-shadow: 0 15px 35px rgba(0,0,0,0.3); overflow: hidden; }
-        .post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .post-author { font-weight: 800; color: var(--accent-blue); }
-        .category-badge { font-size: 10px; background: #eff6ff; color: #3b82f6; padding: 5px 10px; border-radius: 8px; font-weight: 800; text-transform: uppercase; }
-
+        /* POSTS ESTILO INSTAGRAM */
+        .post { background: white; border-radius: 30px; padding: 20px; margin-bottom: 30px; color: #1e293b; box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
         .carousel-container { position: relative; margin: 15px -20px; background: #000; overflow: hidden; }
-        .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
+        .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
         .carousel-track::-webkit-scrollbar { display: none; }
         .carousel-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; aspect-ratio: 1/1; object-fit: cover; }
         
-        .carousel-dots { display: flex; justify-content: center; gap: 6px; margin: 15px 0 5px; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; transition: 0.3s; }
-        .dot.active { background: var(--accent-blue); transform: scale(1.4); }
+        .dots { display: flex; justify-content: center; gap: 5px; margin: 10px 0; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; }
+        .dot.active { background: var(--accent-blue); transform: scale(1.3); }
 
         .btn-like { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 15px; width: 100%; font-weight: 700; color: #64748b; cursor: pointer; }
-        .btn-like.liked { background: #fff5f5; color: #ff4757; border-color: #ff4757; }
-
-        .month-label { text-align: center; color: #94a3b8; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 40px 0 20px; }
+        .btn-like.liked { color: #ff4757; border-color: #ff4757; }
+        .month-sep { text-align: center; color: #94a3b8; font-size: 11px; font-weight: 800; text-transform: uppercase; margin: 40px 0 20px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
     <div class="login-card">
+        <div style="font-size: 50px; margin-bottom: 10px;">🌅</div>
         <h2 style="color:white; margin:0;">Familia Yajure</h2>
-        <p style="color:#94a3b8;">Ingresa la clave de acceso</p>
-        <input type="password" id="passInput" placeholder="Clave aquí...">
+        <input type="password" id="passInput" placeholder="Clave de acceso">
     </div>
 </div>
 
 <div id="app-content">
     <header>
-        <span style="font-weight: 800; color: white;">Nuestros Recuerdos</span>
-        <button onclick="window.salirSession()" style="background:none; border:none; color:#94a3b8; font-weight:700; cursor:pointer;">Cerrar 🔒</button>
+        <span style="font-weight: 800; color: white;">Recuerdos Familiares</span>
+        <button onclick="window.logout()" style="background:none; border:none; color:#94a3b8; font-weight:700; cursor:pointer;">Cerrar 🔒</button>
     </header>
 
     <div class="container">
         <div class="filter-scroll">
-            <button class="filter-btn active" onclick="window.filtrar('Todo')">Todo</button>
-            <button class="filter-btn" onclick="window.filtrar('Familia')">🏠 Familia</button>
-            <button class="filter-btn" onclick="window.filtrar('Fiestas')">🎉 Fiestas</button>
-            <button class="filter-btn" onclick="window.filtrar('Viajes')">✈️ Viajes</button>
-            <button class="filter-btn" onclick="window.filtrar('Recuerdos')">📜 Recuerdos</button>
-            <button class="filter-btn" onclick="window.filtrar('Jodedera')">🤣 Jodedera</button>
+            <button class="filter-btn active" onclick="window.filtrar('Todo', this)">Todo</button>
+            <button class="filter-btn" onclick="window.filtrar('Familia', this)">🏠 Familia</button>
+            <button class="filter-btn" onclick="window.filtrar('Fiestas', this)">🎉 Fiestas</button>
+            <button class="filter-btn" onclick="window.filtrar('Viajes', this)">✈️ Viajes</button>
+            <button class="filter-btn" onclick="window.filtrar('Recuerdos', this)">📜 Recuerdos</button>
+            <button class="filter-btn" onclick="window.filtrar('Jodedera', this)">🤣 Jodedera</button>
         </div>
 
         <div class="upload-card">
             <select id="categoriaInput" class="category-select">
-                <option value="Familia">🏠 Álbum de Familia</option>
-                <option value="Fiestas">🎉 Fiestas y Rumbas</option>
-                <option value="Viajes">✈️ Viajes Familiares</option>
-                <option value="Recuerdos">📜 Viejos Recuerdos</option>
-                <option value="Jodedera">🤣 Jodedera y Risas</option>
+                <option value="Familia">🏠 Familia</option>
+                <option value="Fiestas">🎉 Fiestas</option>
+                <option value="Viajes">✈️ Viajes</option>
+                <option value="Recuerdos">📜 Recuerdos</option>
+                <option value="Jodedera">🤣 Jodedera</option>
             </select>
-            <button class="btn-upload" id="uploadBtn" onclick="document.getElementById('fotoInput').click()">SELECCIONAR FOTOS 📸</button>
-            <p style="color:#64748b; font-size:10px; margin-top:10px;">(Selecciona varias fotos a la vez)</p>
+            <button class="btn-upload" id="upBtn" onclick="document.getElementById('fotoInput').click()">SELECCIONAR FOTOS 📸</button>
+            <p id="up-status" style="text-align:center; font-size:12px; color:#3b82f6; margin-top:10px; font-weight:800; display:none;"></p>
         </div>
 
-        <div id="status-msg"></div>
         <input type="file" id="fotoInput" style="display:none;" accept="image/*" multiple>
-
         <div id="muro"></div>
     </div>
 </div>
@@ -105,69 +97,60 @@
     import { db } from "./firebase.js";
     import { collection, addDoc, query, orderBy, onSnapshot, updateDoc, doc, arrayUnion, arrayRemove, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    const CLAVE_NORMAL = "familia2026";
-    const CLAVE_ADMIN = "ticoadmin2026";
-    const IMGBB_KEY = "07dd4f0a1180673510c5047ae8b5eec8";
+    const C1 = "familia2026", C2 = "ticoadmin2026", KEY = "07dd4f0a1180673510c5047ae8b5eec8";
 
-    // --- ACCESO ---
-    const checkAuth = () => {
-        const auth = localStorage.getItem('familia_auth');
-        if(auth === CLAVE_NORMAL || auth === CLAVE_ADMIN) {
+    // --- LOGIN LOGIC ---
+    const check = () => {
+        const a = localStorage.getItem('familia_auth');
+        if(a === C1 || a === C2) {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('app-content').style.display = 'block';
         }
     };
-    checkAuth();
+    check();
 
     document.getElementById('passInput').oninput = (e) => {
         const v = e.target.value.toLowerCase();
-        if(v === CLAVE_NORMAL || v === CLAVE_ADMIN) {
-            localStorage.setItem('familia_auth', v);
-            location.reload();
-        }
+        if(v === C1 || v === C2) { localStorage.setItem('familia_auth', v); location.reload(); }
     };
 
-    window.salirSession = () => { localStorage.removeItem('familia_auth'); location.reload(); };
+    window.logout = () => { localStorage.removeItem('familia_auth'); location.reload(); };
 
-    // --- SUBIDA DE FOTOS ---
+    // --- SUBIDA ---
     document.getElementById('fotoInput').onchange = async (e) => {
         const files = Array.from(e.target.files);
         if(files.length === 0) return;
-
-        let nombre = localStorage.getItem('user_n') || prompt("Dinos tu nombre:");
-        if(!nombre) return;
-        localStorage.setItem('user_n', nombre);
+        let n = localStorage.getItem('user_n') || prompt("Tu nombre:");
+        if(!n) return; localStorage.setItem('user_n', n);
 
         const cat = document.getElementById('categoriaInput').value;
-        const msg = prompt(`¿Qué quieres decir de estas ${files.length} fotos?`);
-        const status = document.getElementById('status-msg');
-        const btn = document.getElementById('uploadBtn');
+        const msg = prompt(`Mensaje para estas ${files.length} fotos:`);
+        const status = document.getElementById('up-status');
+        const btn = document.getElementById('upBtn');
 
+        status.style.display = "block";
         btn.disabled = true;
         btn.innerHTML = "⏳ SUBIENDO...";
 
         try {
             let urls = [];
             for(let i=0; i < files.length; i++) {
-                status.innerHTML = `🚀 Subiendo ${i+1} de ${files.length}...`;
-                const compressed = await compress(files[i]);
-                const fd = new FormData();
-                fd.append("image", compressed);
-                const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method:"POST", body:fd });
+                status.innerHTML = `🚀 Subiendo ${i+1}/${files.length}...`;
+                const comp = await compress(files[i]);
+                const fd = new FormData(); fd.append("image", comp);
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${KEY}`, { method:"POST", body:fd });
                 const json = await res.json();
                 if(json.success) urls.push(json.data.url);
             }
-
             if(urls.length > 0) {
                 await addDoc(collection(db, "mensajes"), {
                     texto: msg || "", fotos: urls, foto: urls[0],
-                    autor: nombre, categoria: cat, fecha: new Date(),
-                    likesBy: []
+                    autor: n, categoria: cat, fecha: new Date(), likesBy: []
                 });
-                status.innerHTML = "✅ ¡Álbum Publicado!";
-                setTimeout(() => { status.innerHTML = ""; btn.disabled = false; btn.innerHTML = "SELECCIONAR FOTOS 📸"; }, 3000);
+                status.innerHTML = "✅ ¡Publicado!";
+                setTimeout(() => { status.style.display="none"; btn.disabled=false; btn.innerHTML="SELECCIONAR FOTOS 📸"; }, 2000);
             }
-        } catch(err) { alert("Error"); btn.disabled = false; }
+        } catch(err) { alert("Error"); btn.disabled=false; }
     };
 
     async function compress(file) {
@@ -177,8 +160,7 @@
                 const img = new Image(); img.src = ev.target.result;
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
-                    const MAX = 1200;
-                    let w = img.width, h = img.height;
+                    const MAX = 1200; let w = img.width, h = img.height;
                     if(w > MAX) { h *= MAX/w; w = MAX; }
                     canvas.width = w; canvas.height = h;
                     canvas.getContext('2d').drawImage(img, 0, 0, w, h);
@@ -188,93 +170,76 @@
         });
     }
 
-    // --- MURO Y FILTROS ---
-    let filtroActual = "Todo";
-    let cachePosts = [];
+    // --- MURO ---
+    let fActual = "Todo";
+    let allPosts = [];
 
-    window.filtrar = (cat) => {
-        filtroActual = cat;
-        // Actualizar botones visualmente sin recargar
-        const btns = document.querySelectorAll('.filter-btn');
-        btns.forEach(b => {
-            b.classList.toggle('active', b.innerText.includes(cat) || (cat==='Todo' && b.innerText==='Todo'));
-        });
-        pintarMuro();
+    window.filtrar = (cat, btn) => {
+        fActual = cat;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        render();
     };
 
     onSnapshot(query(collection(db, "mensajes"), orderBy("fecha", "desc")), snap => {
-        cachePosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        pintarMuro();
+        allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        render();
     });
 
-    function pintarMuro() {
+    function render() {
         const muro = document.getElementById('muro');
         muro.innerHTML = "";
-        let ultimoMes = "";
-        const miNombre = localStorage.getItem('user_n');
-        const esAdmin = localStorage.getItem('familia_auth') === CLAVE_ADMIN;
+        let uMes = "";
+        const miN = localStorage.getItem('user_n');
+        const esA = localStorage.getItem('familia_auth') === C2;
 
-        const posts = cachePosts.filter(p => filtroActual === "Todo" || p.categoria === filtroActual);
+        const filtered = allPosts.filter(p => fActual === "Todo" || p.categoria === fActual);
 
-        if(posts.length === 0) {
-            muro.innerHTML = `<p style="text-align:center; color:#94a3b8; padding-top:20px;">No hay recuerdos en "${filtroActual}".</p>`;
-            return;
-        }
-
-        posts.forEach(d => {
-            const fecha = d.fecha ? d.fecha.toDate() : new Date();
-            const mesStr = fecha.toLocaleDateString('es', { month: 'long', year: 'numeric' });
-            if(mesStr !== ultimoMes) {
-                muro.innerHTML += `<div class="month-label">${mesStr}</div>`;
-                ultimoMes = mesStr;
-            }
+        filtered.forEach(d => {
+            const date = d.fecha ? d.fecha.toDate() : new Date();
+            const mesStr = date.toLocaleDateString('es', { month: 'long', year: 'numeric' });
+            if(mesStr !== uMes) { muro.innerHTML += `<div class="month-sep">${mesStr}</div>`; uMes = mesStr; }
 
             const fotos = d.fotos || [d.foto];
-            let visualHtml = "";
-            let dotsHtml = "";
-
+            let media = ""; let dots = "";
             if(fotos.length > 1) {
-                visualHtml = `<div class="carousel-container"><div class="carousel-track" id="track-${d.id}" onscroll="window.handleScroll('${d.id}')">${fotos.map(f => `<img src="${f}">`).join('')}</div></div>`;
-                dotsHtml = `<div class="carousel-dots" id="dots-${d.id}">${fotos.map((_,i) => `<div class="dot ${i===0?'active':''}"></div>`).join('')}</div>`;
+                media = `<div class="carousel-container"><div class="carousel-track" id="t-${d.id}" onscroll="window.sc('${d.id}')">${fotos.map(f => `<img src="${f}">`).join('')}</div></div>`;
+                dots = `<div class="dots" id="d-${d.id}">${fotos.map((_,i) => `<div class="dot ${i===0?'active':''}"></div>`).join('')}</div>`;
             } else {
-                visualHtml = `<img src="${fotos[0]}" style="width:100%; border-radius:20px; margin-top:10px; aspect-ratio:1/1; object-fit:cover;">`;
+                media = `<img src="${fotos[0]}" style="width:100%; border-radius:20px; margin-top:10px; aspect-ratio:1/1; object-fit:cover;">`;
             }
 
             muro.innerHTML += `
                 <div class="post">
-                    <div class="post-header">
-                        <span class="post-author">👤 ${d.autor} <span class="category-badge">${d.categoria}</span></span>
-                        ${esAdmin ? `<button onclick="window.borrarPost('${d.id}')" style="background:none; border:none; color:red; font-size:11px; cursor:pointer; font-weight:800;">🗑️ BORRAR</button>` : ''}
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <span style="font-weight:800; color:#3b82f6;">👤 ${d.autor} <span style="font-size:10px; background:#eff6ff; padding:4px 8px; border-radius:8px;">${d.categoria}</span></span>
+                        ${esA ? `<button onclick="window.del('${d.id}')" style="background:none; border:none; color:red; font-size:11px; font-weight:800; cursor:pointer;">BORRAR 🗑️</button>` : ''}
                     </div>
-                    <p style="margin:5px 0 10px; line-height:1.4; font-size:14px;">${d.texto}</p>
-                    ${visualHtml}${dotsHtml}
-                    <button class="btn-like ${d.likesBy?.includes(miNombre)?'liked':''}" onclick="window.darLike('${d.id}')">
-                        ❤️ ${d.likesBy?.includes(miNombre) ? 'Te gusta' : 'Me gusta'} (${d.likesBy?.length || 0})
-                    </button>
-                    <div style="font-size:11px; color:#94a3b8; margin-top:10px;">
-                        ${d.likesBy?.length > 0 ? 'A ' + d.likesBy.join(', ') + ' les gusta esto.' : ''}
-                    </div>
+                    <p style="margin:5px 0 10px; font-size:14px;">${d.texto}</p>
+                    ${media}${dots}
+                    <button class="btn-like ${d.likesBy?.includes(miN)?'liked':''}" onclick="window.lk('${d.id}')">❤️ Me gusta (${d.likesBy?.length || 0})</button>
+                    <div style="font-size:11px; color:#94a3b8; margin-top:10px;">${d.likesBy?.length > 0 ? 'Le gusta a: ' + d.likesBy.join(', ') : ''}</div>
                 </div>`;
         });
     }
 
-    window.handleScroll = (id) => {
-        const track = document.getElementById('track-'+id);
-        const idx = Math.round(track.scrollLeft / track.offsetWidth);
-        const dots = document.getElementById('dots-'+id).querySelectorAll('.dot');
+    window.sc = (id) => {
+        const t = document.getElementById('t-'+id);
+        const idx = Math.round(t.scrollLeft / t.offsetWidth);
+        const dots = document.getElementById('d-'+id).querySelectorAll('.dot');
         dots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
     };
 
-    window.darLike = async (id) => {
+    window.lk = async (id) => {
         const n = localStorage.getItem('user_n');
         const ref = doc(db, "mensajes", id);
-        const snap = await getDoc(ref);
-        const list = snap.data().likesBy || [];
-        if(list.includes(n)) await updateDoc(ref, { likesBy: arrayRemove(n) });
+        const s = await getDoc(ref);
+        const l = s.data().likesBy || [];
+        if(l.includes(n)) await updateDoc(ref, { likesBy: arrayRemove(n) });
         else await updateDoc(ref, { likesBy: arrayUnion(n) });
     };
 
-    window.borrarPost = async (id) => { if(confirm("¿Borrar para siempre?")) await deleteDoc(doc(db, "mensajes", id)); };
+    window.del = async (id) => { if(confirm("¿Borrar?")) await deleteDoc(doc(db, "mensajes", id)); };
 </script>
 </body>
 </html>
