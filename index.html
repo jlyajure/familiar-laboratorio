@@ -4,93 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
-    <title>Familia - Laboratorio V15.1</title>
-    <meta name="apple-mobile-web-app-title" content="Familia">
-    <meta name="application-name" content="Familia">
-    
+    <title>Familia - Laboratorio V15.2</title>
     <link rel="icon" type="image/png" href="https://img.icons8.com/emoji/192/house-with-garden.png">
-    <link rel="apple-touch-icon" href="https://img.icons8.com/emoji/192/house-with-garden.png">
-    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; }
-        :root { --accent-blue: #3b82f6; --dark-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); --wa-green: #25d366; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; min-height: 100vh; background: var(--dark-bg); background-attachment: fixed; color: #f8fafc; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+        :root { --accent-blue: #3b82f6; --dark-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; min-height: 100vh; background: var(--dark-bg); background-attachment: fixed; color: #f8fafc; overflow-x: hidden; }
         
-        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover; display: flex; align-items: flex-start; justify-content: center; z-index: 1000; padding-top: 100px; }
-        #login-screen::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); }
-        .login-card { position: relative; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15); padding: 40px 25px; border-radius: 35px; text-align: center; max-width: 320px; width: 90%; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
-        #passInput { width: 100%; padding: 18px; border: 2px solid rgba(255,255,255,0.2); border-radius: 20px; background: rgba(255,255,255,0.08); color: white; text-align: center; outline: none; margin-top: 20px; font-size: 16px; }
+        #login-screen { position: fixed; inset: 0; background: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover; display: flex; align-items: flex-start; justify-content: center; z-index: 1000; padding-top: 100px; }
+        #login-screen::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+        .login-card { position: relative; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); padding: 40px; border-radius: 30px; text-align: center; width: 90%; max-width: 320px; border: 1px solid rgba(255,255,255,0.1); }
+        #passInput { width: 100%; padding: 15px; border-radius: 15px; border: none; text-align: center; margin-top: 20px; }
+
+        #app-content { display: none; }
+        header { background: rgba(15, 23, 42, 0.9); padding: 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .container { max-width: 480px; margin: auto; padding: 20px; }
+
+        /* PANEL DE SUBIDA MEJORADO */
+        .upload-card { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 30px; }
+        .step-label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; font-weight: 800; }
+        .category-select { width: 100%; padding: 12px; border-radius: 12px; margin-bottom: 20px; font-weight: 700; border: none; }
+        .btn-action { background: var(--accent-blue); color: white; border: none; width: 100%; padding: 15px; border-radius: 15px; font-weight: 800; cursor: pointer; font-size: 14px; box-shadow: 0 10px 20px rgba(59,130,246,0.3); }
         
-        #app-content { display: none; padding-bottom: 40px; }
-        header { background: rgba(15, 23, 42, 0.9); padding: 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .container { max-width: 480px; margin: auto; padding: 20px 15px; }
+        #status-msg { background: white; color: var(--accent-blue); padding: 10px; border-radius: 10px; text-align: center; font-weight: 800; margin-bottom: 15px; display: none; font-size: 13px; }
 
-        .filter-scroll { overflow-x: auto; white-space: nowrap; padding-bottom: 10px; margin-bottom: 15px; }
-        .filter-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; margin-right: 8px; font-size: 13px; cursor: pointer; transition: 0.3s; }
-        .filter-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); font-weight: 800; }
-
-        /* PANEL DE SUBIDA */
-        .upload-box { background: rgba(255,255,255,0.08); padding: 20px; border-radius: 28px; margin-bottom: 25px; border: 1px dashed rgba(255,255,255,0.3); }
-        .category-select { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 15px; background: white; border: 2px solid #3b82f6; font-size: 14px; color: #1e293b; font-weight: 700; cursor: pointer; display: block !important; visibility: visible !important; }
-        .btn-post { background: var(--accent-blue); color: white; padding: 16px; border-radius: 18px; font-weight: 700; cursor: pointer; display: block; text-align: center; transition: 0.3s; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
+        /* POST ESTILO INSTAGRAM */
+        .post { background: white; border-radius: 25px; padding: 20px; margin-bottom: 30px; color: #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .post-author { font-weight: 800; color: var(--accent-blue); }
+        .post-cat { font-size: 10px; background: #eff6ff; padding: 3px 8px; border-radius: 5px; margin-left: 5px; }
         
-        #status-msg { text-align: center; font-size: 14px; color: #3b82f6; margin-bottom: 15px; min-height: 20px; font-weight: 800; background: rgba(255,255,255,0.9); border-radius: 10px; padding: 5px; display: none; }
-        #wa-notice { display: none; background: var(--wa-green); color: white; padding: 15px; border-radius: 22px; text-align: center; font-weight: 800; text-decoration: none; margin-bottom: 25px; }
-
-        /* POST Y CARRUSEL */
-        .post { background: white; border-radius: 28px; padding: 20px; margin-bottom: 25px; color: #1e293b; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.3); overflow: hidden; }
-        .post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .post-author { font-weight: 800; color: var(--accent-blue); font-size: 14px; }
-        .category-badge { font-size: 10px; background: #e0f2fe; color: #0284c7; padding: 4px 8px; border-radius: 8px; font-weight: 700; margin-left: 8px; text-transform: uppercase; }
-        .post-date { font-size: 11px; color: #94a3b8; font-weight: 600; }
-
-        .carousel-container { position: relative; width: calc(100% + 40px); margin-left: -20px; margin-top: 10px; margin-bottom: 10px; }
-        .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+        .carousel-container { position: relative; margin: 15px -20px; overflow: hidden; }
+        .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
         .carousel-track::-webkit-scrollbar { display: none; }
-        .carousel-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; object-fit: cover; aspect-ratio: 1/1; cursor: pointer; }
+        .carousel-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; aspect-ratio: 1/1; object-fit: cover; }
         
-        .carousel-dots { display: flex; justify-content: center; gap: 5px; margin: 10px 0; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; }
-        .dot.active { background: var(--accent-blue); transform: scale(1.3); }
+        .dots { display: flex; justify-content: center; gap: 5px; margin-bottom: 15px; }
+        .dot { width: 6px; height: 6px; background: #cbd5e1; border-radius: 50%; }
+        .dot.active { background: var(--accent-blue); transform: scale(1.2); }
 
-        .btn-like { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 700; width: 100%; text-align: left; }
-        .btn-like.liked { background: #fff5f5; color: #ff4757; border-color: #ff4757; }
-        .comments-section { background: #f8fafc; padding: 12px; border-radius: 18px; margin-top: 10px; }
-        .comment { font-size: 13px; margin-bottom: 6px; border-bottom: 1px solid #edf2f7; padding-bottom: 4px; }
+        .btn-like { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; cursor: pointer; font-weight: 700; color: #64748b; }
+        .btn-like.liked { color: #ff4757; border-color: #ff4757; background: #fff5f5; }
         
-        #photo-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; justify-content: center; align-items: center; }
-        #modal-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .month-separator { text-align: center; font-size: 11px; letter-spacing: 2px; color: #94a3b8; margin: 40px 0 20px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
     <div class="login-card">
-        <div style="font-size: 45px; margin-bottom: 15px;">🌅</div>
-        <h2 style="color: white; margin: 0;">Familia Yajure</h2>
+        <h2>Familia Yajure</h2>
         <input type="password" id="passInput" placeholder="Clave de acceso">
     </div>
 </div>
 
 <div id="app-content">
     <header>
-        <h1 style="font-size: 18px; margin:0; color:white;">Recuerdos Familiares</h1>
-        <button onclick="localStorage.removeItem('familia_auth'); location.reload();" style="background:rgba(255,255,255,0.1); color:#94a3b8; border:none; padding:10px; border-radius:10px; cursor:pointer;">Salir 🔒</button>
+        <span>Familia Yajure</span>
+        <button onclick="localStorage.removeItem('familia_auth'); location.reload();">Salir 🔒</button>
     </header>
-    <div class="container">
-        <div class="filter-scroll">
-            <button class="filter-btn active" onclick="filtrar('Todo')">Todo</button>
-            <button class="filter-btn" onclick="filtrar('Familia')">🏠 Familia</button>
-            <button class="filter-btn" onclick="filtrar('Fiestas')">🎉 Fiestas</button>
-            <button class="filter-btn" onclick="filtrar('Viajes')">✈️ Viajes</button>
-            <button class="filter-btn" onclick="filtrar('Recuerdos')">📜 Recuerdos</button>
-            <button class="filter-btn" onclick="filtrar('Jodedera')">🤣 Jodedera</button>
-        </div>
 
-        <div class="upload-box">
-            <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-bottom: 8px;">1. Selecciona la categoría:</p>
+    <div class="container">
+        <div class="upload-card">
+            <span class="step-label">Paso 1: Categoría</span>
             <select id="categoriaInput" class="category-select">
                 <option value="Familia">🏠 Familia</option>
                 <option value="Fiestas">🎉 Fiestas</option>
@@ -98,18 +75,15 @@
                 <option value="Recuerdos">📜 Recuerdos</option>
                 <option value="Jodedera">🤣 Jodedera</option>
             </select>
-            <label for="fotoInput" id="labelPost" class="btn-post">2. SELECCIONAR FOTOS 📸</label>
+
+            <span class="step-label">Paso 2: Fotos</span>
+            <button class="btn-action" id="triggerBtn" onclick="document.getElementById('fotoInput').click()">SELECCIONAR FOTOS 📸</button>
         </div>
 
         <div id="status-msg"></div>
         <input type="file" id="fotoInput" style="display:none;" accept="image/*" multiple>
-        
         <div id="muro"></div>
     </div>
-</div>
-
-<div id="photo-modal" onclick="this.style.display='none'">
-    <img id="modal-img" src="">
 </div>
 
 <script type="module">
@@ -118,180 +92,134 @@
 
     const CLAVE_NORMAL = "familia2026";
     const CLAVE_ADMIN = "ticoadmin2026";
-    const IMGBB_KEY = "07dd4f0a1180673510c5047ae8b5eec8"; 
-
-    let todosLosPosts = [];
-    let filtroActual = 'Todo';
-
-    const getNombre = () => {
-        let n = localStorage.getItem('user_n');
-        if(!n) { n = prompt("👤 Escribe tu nombre:"); if(n) localStorage.setItem('user_n', n); }
-        return n;
-    };
+    const IMGBB_KEY = "07dd4f0a1180673510c5047ae8b5eec8";
 
     if(localStorage.getItem('familia_auth')) {
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('app-content').style.display = 'block';
-        getNombre();
     }
 
     document.getElementById('passInput').oninput = (e) => {
-        const val = e.target.value.toLowerCase();
-        if(val === CLAVE_NORMAL || val === CLAVE_ADMIN) {
-            localStorage.setItem('familia_auth', val);
-            location.reload();
-        }
+        const v = e.target.value.toLowerCase();
+        if(v === CLAVE_NORMAL || v === CLAVE_ADMIN) { localStorage.setItem('familia_auth', v); location.reload(); }
     };
 
-    window.abrirLupa = (url) => {
-        document.getElementById('modal-img').src = url;
-        document.getElementById('photo-modal').style.display = 'flex';
-    };
-
-    // --- CORRECCIÓN SUBIDA ---
+    // --- FUNCIÓN DE SUBIDA ---
     document.getElementById('fotoInput').onchange = async (e) => {
         const files = Array.from(e.target.files);
-        if (files.length === 0) return;
-        const nombre = getNombre();
-        if (!nombre) return;
+        if(files.length === 0) return;
+
+        let nombre = localStorage.getItem('user_n');
+        if(!nombre) { nombre = prompt("Tu nombre:"); localStorage.setItem('user_n', nombre); }
         
         const cat = document.getElementById('categoriaInput').value;
-        const mensaje = prompt(`✍️ Mensaje para este álbum (${files.length} fotos):`);
-        
-        const label = document.getElementById('labelPost');
+        const msg = prompt(`Mensaje para estas ${files.length} fotos:`);
         const status = document.getElementById('status-msg');
-        
+        const btn = document.getElementById('triggerBtn');
+
         status.style.display = "block";
-        label.innerHTML = "⏳ SUBIENDO...";
-        
+        btn.disabled = true;
+        btn.innerHTML = "⌛ SUBIENDO...";
+
         try {
-            let urlsSubidas = [];
+            let urls = [];
             for(let i=0; i < files.length; i++) {
-                status.innerHTML = `🚀 Subiendo foto ${i+1} de ${files.length}...`;
-                const compressedFile = await compressImage(files[i]);
-                const formData = new FormData();
-                formData.append("image", compressedFile);
-                const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method: "POST", body: formData });
-                const imgData = await res.json();
-                if (imgData.success) urlsSubidas.push(imgData.data.url);
+                status.innerHTML = `Subiendo ${i+1} de ${files.length}...`;
+                const compressed = await compress(files[i]);
+                const fd = new FormData();
+                fd.append("image", compressed);
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method:"POST", body:fd });
+                const json = await res.json();
+                if(json.success) urls.push(json.data.url);
             }
 
-            if (urlsSubidas.length > 0) {
+            if(urls.length > 0) {
                 await addDoc(collection(db, "mensajes"), {
-                    texto: mensaje || "", fotos: urlsSubidas, foto: urlsSubidas[0], 
-                    autor: nombre, categoria: cat, fecha: new Date(), likesBy: [], comentarios: []
+                    texto: msg || "", fotos: urls, foto: urls[0],
+                    autor: nombre, categoria: cat, fecha: new Date(),
+                    likesBy: []
                 });
-                status.innerHTML = "✅ ¡Álbum Publicado con éxito!";
-                setTimeout(() => status.style.display = "none", 3000);
-                label.innerHTML = "2. SELECCIONAR FOTOS 📸";
-                e.target.value = ""; // Limpiar input
+                status.innerHTML = "✅ ¡Publicado!";
+                setTimeout(() => { status.style.display="none"; btn.disabled=false; btn.innerHTML="SELECCIONAR FOTOS 📸"; }, 3000);
             }
-        } catch (err) { alert("Error: " + err.message); label.innerHTML = "2. SELECCIONAR FOTOS 📸"; }
+        } catch(err) { alert("Error"); btn.disabled=false; }
     };
 
-    async function compressImage(file) {
-        return new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = (ev) => {
-                const img = new Image();
-                img.src = ev.target.result;
+    async function compress(file) {
+        return new Promise(res => {
+            const r = new FileReader(); r.readAsDataURL(file);
+            r.onload = e => {
+                const img = new Image(); img.src = e.target.result;
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
-                    const MAX = 1200;
+                    const MAX = 1000;
                     let w = img.width, h = img.height;
-                    if (w > MAX) { h *= MAX / w; w = MAX; }
+                    if(w > MAX) { h *= MAX/w; w = MAX; }
                     canvas.width = w; canvas.height = h;
                     canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                    canvas.toBlob((blob) => resolve(blob), 'image/jpeg', 0.8);
-                };
-            };
+                    canvas.toBlob(blob => res(blob), 'image/jpeg', 0.7);
+                }
+            }
         });
     }
 
-    window.filtrar = (cat) => {
-        filtroActual = cat;
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if(btn.innerText.includes(cat) || (cat === 'Todo' && btn.innerText === 'Todo')) btn.classList.add('active');
-        });
-        pintarMuro();
-    };
-
-    onSnapshot(query(collection(db, "mensajes"), orderBy("fecha", "desc")), (snapshot) => {
-        todosLosPosts = []; snapshot.forEach((doc) => todosLosPosts.push({ id: doc.id, ...doc.data() }));
-        pintarMuro();
-    });
-
-    function pintarMuro() {
+    // --- MURO ---
+    onSnapshot(query(collection(db, "mensajes"), orderBy("fecha", "desc")), snap => {
         const muro = document.getElementById('muro');
         muro.innerHTML = "";
-        const esAdmin = localStorage.getItem('familia_auth') === "ticoadmin2026";
-        const miNombre = localStorage.getItem('user_n'); 
-        let ultimoMes = "";
-        const postsAmostrar = todosLosPosts.filter(p => filtroActual === 'Todo' || p.categoria === filtroActual);
+        let uMes = "";
+        const esAdmin = localStorage.getItem('familia_auth') === CLAVE_ADMIN;
+        const miNombre = localStorage.getItem('user_n');
 
-        postsAmostrar.forEach((data) => {
-            const fechaObj = data.fecha ? data.fecha.toDate() : new Date();
-            const mesActual = fechaObj.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
-            if (mesActual !== ultimoMes) { muro.innerHTML += `<div class="month-separator">${mesActual}</div>`; ultimoMes = mesActual; }
+        snap.forEach(docSnap => {
+            const d = docSnap.data();
+            const id = docSnap.id;
+            const fecha = d.fecha ? d.fecha.toDate() : new Date();
+            const mes = fecha.toLocaleDateString('es',{month:'long', year:'numeric'});
 
-            const fotosArray = data.fotos || [data.foto];
-            let carruselHtml = "";
+            if(mes !== uMes) { muro.innerHTML += `<div class="month-separator">${mes}</div>`; uMes = mes; }
+
+            const fotos = d.fotos || [d.foto];
+            let mediaHtml = "";
             let dotsHtml = "";
 
-            if(fotosArray.length > 1) {
-                carruselHtml = `<div class="carousel-container"><div class="carousel-track" id="track-${data.id}" onscroll="updateDots('${data.id}')">${fotosArray.map(f => `<img src="${f}" onclick="window.abrirLupa('${f}')">`).join('')}</div></div>`;
-                dotsHtml = `<div class="carousel-dots" id="dots-${data.id}">${fotosArray.map((_, i) => `<div class="dot ${i===0?'active':''}"></div>`).join('')}</div>`;
+            if(fotos.length > 1) {
+                mediaHtml = `<div class="carousel-container"><div class="carousel-track" id="t-${id}" onscroll="updateDots('${id}')">${fotos.map(f => `<img src="${f}">`).join('')}</div></div>`;
+                dotsHtml = `<div class="dots" id="d-${id}">${fotos.map((_,i)=>`<div class="dot ${i===0?'active':''}"></div>`).join('')}</div>`;
             } else {
-                carruselHtml = `<img src="${fotosArray[0]}" onclick="window.abrirLupa('${fotosArray[0]}')" style="width:100%; border-radius:20px; margin-top:10px; aspect-ratio:1/1; object-fit:cover;">`;
+                mediaHtml = `<img src="${fotos[0]}" style="width:100%; border-radius:15px; margin:10px 0;">`;
             }
 
             muro.innerHTML += `
                 <div class="post">
-                    <div class="post-header">
-                        <span class="post-author">👤 ${data.autor} <span class="category-badge">${data.categoria}</span></span>
-                        <div>${esAdmin ? `<button style="background:red;color:white;border:none;border-radius:5px;" onclick="window.borrarPost('${data.id}')">🗑️</button>` : ""}</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span class="post-author">${d.autor}<span class="post-cat">${d.categoria}</span></span>
+                        ${esAdmin ? `<button onclick="borrar('${id}')" style="background:none; border:none; cursor:pointer;">🗑️</button>` : ''}
                     </div>
-                    <p>${data.texto}</p>
-                    ${carruselHtml}${dotsHtml}
-                    <button class="btn-like ${data.likesBy?.includes(miNombre)?'liked':''}" onclick="darLike('${data.id}')">❤️ Me gusta (${data.likesBy?.length || 0})</button>
-                    <div class="comments-section">
-                        ${(data.comentarios || []).map(c => `<div class="comment"><b>${c.autor}:</b> ${c.texto}</div>`).join('')}
-                        <div class="comment-input-group">
-                            <input type="text" id="input-${data.id}" class="comment-input" placeholder="Opinar...">
-                            <button style="background:#3b82f6;color:white;border:none;padding:8px;border-radius:8px;" onclick="enviarComentario('${data.id}')">Puntuar</button>
-                        </div>
-                    </div>
+                    <p style="font-size:14px; margin:10px 0;">${d.texto}</p>
+                    ${mediaHtml}${dotsHtml}
+                    <button class="btn-like ${d.likesBy?.includes(miNombre)?'liked':''}" onclick="like('${id}')">❤️ Me gusta (${d.likesBy?.length || 0})</button>
                 </div>`;
         });
-    }
+    });
 
-    window.updateDots = (postId) => {
-        const track = document.getElementById(`track-${postId}`);
-        const index = Math.round(track.scrollLeft / track.offsetWidth);
-        const dots = document.getElementById(`dots-${postId}`).querySelectorAll('.dot');
-        dots.forEach((dot, i) => i === index ? dot.classList.add('active') : dot.classList.remove('active'));
+    window.updateDots = (id) => {
+        const t = document.getElementById('t-'+id);
+        const idx = Math.round(t.scrollLeft / t.offsetWidth);
+        const dots = document.getElementById('d-'+id).querySelectorAll('.dot');
+        dots.forEach((dot, i) => i === idx ? dot.classList.add('active') : dot.classList.remove('active'));
     };
 
-    window.darLike = async (id) => {
-        const nombre = getNombre();
-        const docRef = doc(db, "mensajes", id);
-        const docSnap = await getDoc(docRef);
-        const lista = docSnap.data().likesBy || [];
-        if (lista.includes(nombre)) await updateDoc(docRef, { likesBy: arrayRemove(nombre) });
-        else await updateDoc(docRef, { likesBy: arrayUnion(nombre) });
+    window.like = async (id) => {
+        const n = localStorage.getItem('user_n');
+        const ref = doc(db, "mensajes", id);
+        const snap = await getDoc(ref);
+        const list = snap.data().likesBy || [];
+        if(list.includes(n)) await updateDoc(ref, { likesBy: arrayRemove(n) });
+        else await updateDoc(ref, { likesBy: arrayUnion(n) });
     };
 
-    window.enviarComentario = async (id) => {
-        const input = document.getElementById(`input-${id}`);
-        const nombre = getNombre();
-        if (!input.value) return;
-        await updateDoc(doc(db, "mensajes", id), { comentarios: arrayUnion({ autor: nombre, texto: input.value }) });
-        input.value = "";
-    };
-
-    window.borrarPost = async (id) => { if(confirm("¿Borrar?")) await deleteDoc(doc(db, "mensajes", id)); };
+    window.borrar = async (id) => { if(confirm("¿Borrar?")) await deleteDoc(doc(db, "mensajes", id)); };
 </script>
 </body>
 </html>
