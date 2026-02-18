@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Familia Yajure - Oficial V26</title>
+    <title>Familia Yajure - V27 FINAL</title>
     <link rel="icon" type="image/png" href="https://img.icons8.com/emoji/192/house-with-garden.png">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; }
-        :root { --accent-blue: #3b82f6; --dark-bg: #0f172a; --danger-red: #dc2626; }
+        :root { --accent-blue: #3b82f6; --dark-bg: #0f172a; --danger: #ef4444; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: var(--dark-bg); color: white; overflow-x: hidden; }
         
-        /* LOGIN */
-        #login-screen { position: fixed; inset: 0; background: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover; display: flex; align-items: flex-start; justify-content: center; z-index: 1000; padding-top: 60px; }
+        /* LOGIN - POSICIÓN ALTA */
+        #login-screen { position: fixed; inset: 0; background: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover; display: flex; align-items: flex-start; justify-content: center; z-index: 2000; padding-top: 60px; }
         #login-screen::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
-        .login-card { position: relative; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); padding: 30px; border-radius: 30px; text-align: center; width: 90%; max-width: 320px; border: 1px solid rgba(255,255,255,0.1); }
+        .login-card { position: relative; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(15px); padding: 35px; border-radius: 30px; text-align: center; width: 90%; max-width: 320px; border: 1px solid rgba(255,255,255,0.1); }
         #passInput { width: 100%; padding: 15px; border-radius: 15px; border: 2px solid #334155; background: #1e293b; color: white; text-align: center; font-size: 18px; margin-top: 15px; outline: none; }
 
         /* APP */
@@ -29,36 +29,32 @@
         .filter-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); }
 
         /* POSTS */
-        .post { background: white; border-radius: 25px; padding: 15px; margin-bottom: 25px; color: #0f172a; box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative; }
-        .carousel-wrapper { position: relative; margin: 10px -15px; background: #000; overflow: hidden; }
+        .post { background: white; border-radius: 25px; padding: 20px; margin-bottom: 25px; color: #0f172a; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .carousel-wrapper { position: relative; margin: 15px -20px; background: #000; overflow: hidden; }
         .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
-        .carousel::-webkit-scrollbar { display: none; }
         .carousel img { width: 100%; flex-shrink: 0; scroll-snap-align: start; aspect-ratio: 1/1; object-fit: cover; }
         
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; z-index: 10; font-weight: bold; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 10; font-weight: bold; font-size: 18px; }
         .prev-btn { left: 10px; }
         .next-btn { right: 10px; }
 
-        .dots { display: flex; justify-content: center; gap: 5px; margin-top: 10px; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; }
+        .dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: #cbd5e1; }
         .dot.active { background: var(--accent-blue); }
 
-        /* LIKE Y COMENTARIOS */
-        .btn-like { background: none; border: none; font-size: 16px; cursor: pointer; padding: 5px 0; display: flex; align-items: center; gap: 8px; color: #64748b; font-weight: 800; }
+        /* ACCIONES */
+        .btn-like { background: none; border: none; font-size: 16px; cursor: pointer; display: flex; align-items: center; gap: 8px; color: #64748b; font-weight: 800; padding: 10px 0; }
         .btn-like.liked { color: #ff4757; }
         
-        /* PAPELERA ROJA PODEROSA */
-        .btn-delete-final { background: var(--danger-red); color: white; border: none; padding: 8px 12px; border-radius: 12px; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3); }
-        .btn-delete-final:hover { transform: scale(1.1); background: #b91c1c; }
+        /* PAPELERA ROJA DE PODER */
+        .btn-borrar-realo { background: var(--danger); color: white; border: none; padding: 10px 14px; border-radius: 12px; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .btn-borrar-realo:hover { transform: scale(1.1); background: #b91c1c; }
 
-        .likes-names { font-size: 11px; color: #94a3b8; margin: 5px 0 10px; font-style: italic; }
+        .likes-names { font-size: 11px; color: #94a3b8; margin-bottom: 10px; font-style: italic; }
         .comments-box { background: #f8fafc; border-radius: 15px; padding: 10px; margin-top: 10px; }
-        .comment-item { font-size: 13px; margin-bottom: 5px; border-bottom: 1px solid #f1f5f9; padding-bottom: 3px; }
-        .comment-input-group { display: flex; gap: 5px; margin-top: 10px; }
-        .comment-input { flex: 1; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px; font-size: 12px; outline: none; }
-        .btn-comment { background: var(--accent-blue); color: white; border: none; padding: 5px 12px; border-radius: 10px; font-size: 11px; font-weight: 800; cursor: pointer; }
-
-        .upload-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 25px; border: 1px dashed rgba(255,255,255,0.2); margin-bottom: 25px; text-align: center; }
+        .comment-item { font-size: 13px; margin-bottom: 5px; border-bottom: 1px solid #f1f5f9; }
+        
+        .upload-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 25px; border: 1px dashed rgba(255,255,255,0.3); margin-bottom: 25px; text-align: center; }
         .btn-upload { background: var(--accent-blue); color: white; width: 100%; padding: 15px; border-radius: 15px; font-weight: 800; border: none; cursor: pointer; }
     </style>
 </head>
@@ -75,7 +71,7 @@
 <div id="app-content">
     <header>
         <span style="font-weight: 800;">Recuerdos Familiares</span>
-        <button onclick="window.salir()" style="background:none; border:none; color:#94a3b8; font-weight:700; cursor:pointer;">Cerrar 🔒</button>
+        <button onclick="window.salirSeguro()" style="background:#334155; border:none; color:white; padding:8px 15px; border-radius:10px; font-weight:700; cursor:pointer;">Cerrar 🔒</button>
     </header>
 
     <div class="container">
@@ -111,102 +107,144 @@
 
     const C1 = "familia2026", C2 = "ticoadmin2026", KEY = "07dd4f0a1180673510c5047ae8b5eec8";
 
-    // LOGIN
-    const check = () => { if(localStorage.getItem('familia_auth')) { document.getElementById('login-screen').style.display = 'none'; document.getElementById('app-content').style.display = 'block'; } };
-    check();
-    document.getElementById('passInput').oninput = (e) => { const v = e.target.value.toLowerCase(); if(v === C1 || v === C2) { localStorage.setItem('familia_auth', v); location.reload(); } };
-    window.salir = () => { localStorage.removeItem('familia_auth'); location.reload(); };
+    // --- MANEJO DE ACCESO ---
+    const verificar = () => {
+        const auth = localStorage.getItem('familia_auth');
+        if (auth === C1 || auth === C2) {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-content').style.display = 'block';
+        } else {
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('app-content').style.display = 'none';
+        }
+    };
+    verificar();
 
-    // SUBIDA
+    document.getElementById('passInput').oninput = (e) => {
+        const v = e.target.value.toLowerCase();
+        if (v === C1 || v === C2) {
+            localStorage.setItem('familia_auth', v);
+            verificar();
+        }
+    };
+
+    window.salirSeguro = () => {
+        localStorage.clear(); // Limpia TODO para que no entre solo
+        window.location.reload();
+    };
+
+    // --- SUBIDA DE FOTOS ---
     document.getElementById('fotoInput').onchange = async (e) => {
-        const files = Array.from(e.target.files); if(files.length === 0) return;
-        let n = localStorage.getItem('user_n') || prompt("Dinos tu nombre:"); if(!n) return; localStorage.setItem('user_n', n);
+        const files = Array.from(e.target.files);
+        if (files.length === 0) return;
+        let nombre = localStorage.getItem('user_n') || prompt("Dinos tu nombre:");
+        if (!nombre) return; localStorage.setItem('user_n', nombre);
+
         const cat = document.getElementById('categoriaInput').value;
-        const msg = prompt(`Mensaje para este álbum de ${files.length} fotos:`);
-        const status = document.getElementById('up-status'); const btn = document.getElementById('btnUp');
+        const msg = prompt(`Mensaje para este álbum:`);
+        const status = document.getElementById('up-status');
+        const btn = document.getElementById('btnUp');
+
         btn.disabled = true; btn.innerHTML = "⏳ SUBIENDO...";
         try {
             let urls = [];
-            for(let i=0; i < files.length; i++) {
-                status.innerHTML = `Subiendo ${i+1}/${files.length}...`;
+            for (let i = 0; i < files.length; i++) {
+                status.innerHTML = `Subiendo ${i + 1}/${files.length}...`;
                 const fd = new FormData(); fd.append("image", files[i]);
-                const res = await fetch(`https://api.imgbb.com/1/upload?key=${KEY}`, { method:"POST", body:fd });
-                const json = await res.json(); if(json.success) urls.push(json.data.url);
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${KEY}`, { method: "POST", body: fd });
+                const json = await res.json(); if (json.success) urls.push(json.data.url);
             }
-            if(urls.length > 0) {
-                await addDoc(collection(db, "mensajes"), { texto: msg || "", fotos: urls, foto: urls[0], autor: n, categoria: cat, fecha: new Date(), likesBy: [], comentarios: [] });
-                location.reload();
+            if (urls.length > 0) {
+                await addDoc(collection(db, "mensajes"), { texto: msg || "", fotos: urls, foto: urls[0], autor: nombre, categoria: cat, fecha: new Date(), likesBy: [], comentarios: [] });
+                status.innerHTML = "✅ ¡Listo!";
+                setTimeout(() => { status.innerHTML = ""; btn.disabled = false; btn.innerHTML = "SELECCIONAR FOTOS 📸"; }, 2000);
             }
-        } catch(err) { alert("Error"); btn.disabled = false; }
+        } catch (err) { alert("Error"); btn.disabled = false; }
     };
 
-    // MURO
+    // --- MURO Y FILTROS ---
     let fActual = "Todo", postsCache = [];
-    window.filtrar = (cat) => { fActual = cat; document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.id === 'btn-'+cat)); render(); };
-    onSnapshot(query(collection(db, "mensajes"), orderBy("fecha", "desc")), snap => { postsCache = snap.docs.map(d => ({ id: d.id, ...d.data() })); render(); });
+    window.filtrar = (cat) => {
+        fActual = cat;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.id === 'btn-' + cat));
+        render();
+    };
 
-    window.moveSlide = (id, direction) => { const c = document.getElementById('t-' + id); c.scrollBy({ left: direction * c.offsetWidth, behavior: 'smooth' }); };
+    onSnapshot(query(collection(db, "mensajes"), orderBy("fecha", "desc")), snap => {
+        postsCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        render();
+    });
+
+    window.moveSlide = (id, dir) => {
+        const c = document.getElementById('t-' + id);
+        c.scrollBy({ left: dir * c.offsetWidth, behavior: 'smooth' });
+    };
 
     function render() {
         const muro = document.getElementById('muro'); muro.innerHTML = "";
         const miN = localStorage.getItem('user_n');
         const esAdmin = localStorage.getItem('familia_auth') === C2;
-        const filtered = postsCache.filter(p => fActual === "Todo" || p.categoria === fActual);
+        const filtrados = postsCache.filter(p => fActual === "Todo" || p.categoria === fActual);
 
-        filtered.forEach(d => {
+        filtrados.forEach(d => {
             const fotos = d.fotos || [d.foto];
             let media = "";
-            if(fotos.length > 1) {
-                media = `<div class="carousel-wrapper"><button class="nav-btn prev-btn" onclick="window.moveSlide('${d.id}', -1)">❮</button><div class="carousel" id="t-${d.id}" onscroll="window.updDots('${d.id}')">${fotos.map(f => `<img src="${f}">`).join('')}</div><button class="nav-btn next-btn" onclick="window.moveSlide('${d.id}', 1)">❯</button></div><div class="dots" id="d-${d.id}">${fotos.map((_,i) => `<div class="dot ${i===0?'active':''}"></div>`).join('')}</div>`;
+            if (fotos.length > 1) {
+                media = `<div class="carousel-wrapper"><button class="nav-btn prev-btn" onclick="window.moveSlide('${d.id}', -1)">❮</button><div class="carousel" id="t-${d.id}" onscroll="window.updDots('${d.id}')">${fotos.map(f => `<img src="${f}">`).join('')}</div><button class="nav-btn next-btn" onclick="window.moveSlide('${d.id}', 1)">❯</button></div><div class="dots" id="d-${d.id}">${fotos.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}"></div>`).join('')}</div>`;
             } else {
                 media = `<img src="${fotos[0]}" style="width:100%; border-radius:15px; margin-top:10px; aspect-ratio:1/1; object-fit:cover;">`;
             }
 
             const yaLike = d.likesBy?.includes(miN);
             const likesList = d.likesBy?.length > 0 ? `Le gusta a: <b>${d.likesBy.join(', ')}</b>` : "";
-            const commentsHtml = (d.comentarios || []).map(c => `<div class="comment-item"><b>${c.autor}:</b> ${c.texto}</div>`).join('');
+            const comms = (d.comentarios || []).map(c => `<div class="comment-item"><b>${c.autor}:</b> ${c.texto}</div>`).join('');
 
             muro.innerHTML += `
                 <div class="post">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <span style="font-weight:800; color:#3b82f6;">👤 ${d.autor} <small style="color:#94a3b8">(${d.categoria})</small></span>
-                        ${esAdmin ? `<button class="btn-delete-final" onclick="window.borrarPost('${d.id}')">🗑️</button>` : ''}
+                        ${esAdmin ? `<button class="btn-borrar-realo" onclick="window.borrarPost('${d.id}')">🗑️</button>` : ''}
                     </div>
                     <p style="margin:8px 0; font-size:14px;">${d.texto}</p>
                     ${media}
-                    <button class="btn-like ${yaLike?'liked':''}" onclick="window.like('${d.id}')">${yaLike?'❤️':'🤍'} Me gusta (${d.likesBy?.length || 0})</button>
+                    <button class="btn-like ${yaLike ? 'liked' : ''}" onclick="window.like('${d.id}')">${yaLike ? '❤️' : '🤍'} Me gusta (${d.likesBy?.length || 0})</button>
                     <div class="likes-names">${likesList}</div>
                     <div class="comments-box">
-                        ${commentsHtml}
+                        ${comms}
                         <div class="comment-input-group">
                             <input type="text" id="in-${d.id}" class="comment-input" placeholder="Comentar...">
-                            <button class="btn-comment" onclick="window.comentar('${d.id}')">Enviar</button>
+                            <button style="background:#3b82f6; color:white; border:none; border-radius:10px; padding:5px 10px; cursor:pointer;" onclick="window.comentar('${d.id}')">Enviar</button>
                         </div>
                     </div>
                 </div>`;
         });
     }
 
-    window.updDots = (id) => { const t = document.getElementById('t-'+id); const idx = Math.round(t.scrollLeft / t.offsetWidth); const dots = document.getElementById('d-'+id).querySelectorAll('.dot'); dots.forEach((dot, i) => dot.classList.toggle('active', i === idx)); };
+    // --- FUNCIONES GLOBALES (SOLUCIÓN AL FALLO) ---
+    window.updDots = (id) => { 
+        const t = document.getElementById('t-' + id); 
+        const idx = Math.round(t.scrollLeft / t.offsetWidth); 
+        const dots = document.getElementById('d-' + id).querySelectorAll('.dot'); 
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === idx)); 
+    };
     
     window.like = async (id) => {
         const n = localStorage.getItem('user_n'); const ref = doc(db, "mensajes", id); const s = await getDoc(ref); const l = s.data().likesBy || [];
-        if(l.includes(n)) await updateDoc(ref, { likesBy: arrayRemove(n) }); else await updateDoc(ref, { likesBy: arrayUnion(n) });
+        if (l.includes(n)) await updateDoc(ref, { likesBy: arrayRemove(n) }); else await updateDoc(ref, { likesBy: arrayUnion(n) });
     };
 
     window.comentar = async (id) => {
-        const input = document.getElementById('in-'+id); const n = localStorage.getItem('user_n'); if(!input.value) return;
+        const input = document.getElementById('in-' + id); const n = localStorage.getItem('user_n'); if (!input.value) return;
         await updateDoc(doc(db, "mensajes", id), { comentarios: arrayUnion({ autor: n, texto: input.value }) });
         input.value = "";
     };
 
-    // BORRADO DEFINITIVO
     window.borrarPost = async (id) => {
-        if(confirm("🚨 Mi Director, ¿está seguro de borrar este recuerdo? Esta acción es definitiva.")) {
+        if (confirm("🚨 Director, ¿borrar este recuerdo para siempre?")) {
             try {
                 await deleteDoc(doc(db, "mensajes", id));
             } catch (err) {
-                alert("Error al borrar: " + err.message);
+                alert("Error al borrar.");
             }
         }
     };
