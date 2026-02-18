@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
-    <title>Familia</title>
+    <title>Familia - Recuerdos</title>
     <meta name="apple-mobile-web-app-title" content="Familia">
     <meta name="application-name" content="Familia">
     
@@ -32,29 +32,33 @@
         .filter-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); font-weight: 800; }
 
         .category-select { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 15px; background: rgba(255,255,255,0.9); border: none; font-size: 14px; color: #1e293b; }
-        
         .month-separator { background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 8px 20px; border-radius: 50px; font-size: 12px; font-weight: 800; text-align: center; margin: 30px 0 15px 0; border: 1px solid rgba(59, 130, 246, 0.3); letter-spacing: 2px; text-transform: uppercase; }
-        
         .btn-post { background: var(--accent-blue); color: white; padding: 16px; border-radius: 18px; font-weight: 700; cursor: pointer; display: block; text-align: center; margin-bottom: 10px; transition: transform 0.2s; }
-        
         #status-msg { text-align: center; font-size: 12px; color: #94a3b8; margin-bottom: 20px; min-height: 15px; }
         #wa-notice { display: none; background: var(--wa-green); color: white; padding: 15px; border-radius: 22px; text-align: center; font-weight: 800; text-decoration: none; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(37,211,102,0.3); }
 
-        .post { background: white; border-radius: 28px; padding: 20px; margin-bottom: 25px; color: #1e293b; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        /* POST Y CARRUSEL TIPO INSTAGRAM */
+        .post { background: white; border-radius: 28px; padding: 20px; margin-bottom: 25px; color: #1e293b; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.3); overflow: hidden; }
         .post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .post-author { font-weight: 800; color: var(--accent-blue); font-size: 14px; }
         .category-badge { font-size: 10px; background: #e0f2fe; color: #0284c7; padding: 4px 8px; border-radius: 8px; font-weight: 700; margin-left: 8px; text-transform: uppercase; }
         .post-date { font-size: 11px; color: #94a3b8; font-weight: 600; }
-        
         .btn-delete-admin { background: #ff4757; color: white; border: none; padding: 6px 10px; border-radius: 10px; cursor: pointer; margin-left: 10px; }
+
+        /* CONTENEDOR DEL CARRUSEL */
+        .carousel-container { position: relative; width: calc(100% + 40px); margin-left: -20px; margin-top: 10px; margin-bottom: 10px; }
+        .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+        .carousel-track::-webkit-scrollbar { display: none; }
+        .carousel-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; object-fit: cover; aspect-ratio: 1/1; cursor: pointer; }
         
-        .post img { width: 100%; border-radius: 20px; margin: 10px 0; display: block; cursor: pointer; }
-        
+        /* PUNTOS INDICADORES */
+        .carousel-dots { display: flex; justify-content: center; gap: 5px; margin-top: 10px; margin-bottom: 10px; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; transition: 0.3s; }
+        .dot.active { background: var(--accent-blue); transform: scale(1.3); }
+
         .btn-like { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; padding: 8px 15px; border-radius: 12px; cursor: pointer; font-weight: 700; width: 100%; text-align: left; margin-bottom: 5px; transition: 0.3s; }
         .btn-like.liked { background: #fff5f5; color: #ff4757; border-color: #ff4757; }
-        
         .likes-list { font-size: 11px; color: #64748b; margin-bottom: 15px; margin-left: 5px; font-style: italic; }
-
         .comments-section { background: #f8fafc; padding: 12px; border-radius: 18px; }
         .comment { font-size: 13px; margin-bottom: 6px; border-bottom: 1px solid #edf2f7; padding-bottom: 4px; }
         .comment-input-group { display: flex; gap: 8px; margin-top: 10px; }
@@ -62,7 +66,7 @@
         .btn-send-comment { background: var(--accent-blue); color: white; border: none; padding: 8px 12px; border-radius: 10px; cursor: pointer; }
 
         #photo-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; overflow: auto; justify-content: center; align-items: center; }
-        #modal-img { max-width: 100%; max-height: 100%; object-fit: contain; cursor: zoom-in; transition: transform 0.2s; }
+        #modal-img { max-width: 100%; max-height: 100%; object-fit: contain; }
         #close-modal-btn { position: fixed; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 5001; background: rgba(0,0,0,0.5); width: 45px; height: 45px; text-align: center; line-height: 45px; border-radius: 50%; border: 2px solid white; }
     </style>
 </head>
@@ -98,7 +102,7 @@
         
         <div id="upload-options" style="display:none;">
             <select id="categoriaInput" class="category-select">
-                <option value="Familia">🏠 ¿Qué tipo de foto es? (Familia)</option>
+                <option value="Familia">🏠 ¿Qué tipo de fotos son? (Familia)</option>
                 <option value="Fiestas">🎉 Fiestas</option>
                 <option value="Viajes">✈️ Viajes</option>
                 <option value="Recuerdos">📜 Recuerdos</option>
@@ -107,7 +111,7 @@
         </div>
 
         <div id="status-msg"></div>
-        <input type="file" id="fotoInput" style="display:none;" accept="image/*">
+        <input type="file" id="fotoInput" style="display:none;" accept="image/*" multiple>
         <div id="muro"></div>
     </div>
 </div>
@@ -164,48 +168,62 @@
         if(opts.style.display === 'none') {
             e.preventDefault();
             opts.style.display = 'block';
-            document.getElementById('labelPost').innerHTML = "📸 AHORA SÍ, TOCA AQUÍ";
+            document.getElementById('labelPost').innerHTML = "📸 SELECCIONA TUS FOTOS";
         }
     };
 
+    // --- LOGICA DE SUBIDA MÚLTIPLE ---
     document.getElementById('fotoInput').onchange = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+        const files = Array.from(e.target.files);
+        if (files.length === 0) return;
+        
         const nombre = getNombre();
         if (!nombre) return;
         
         const cat = document.getElementById('categoriaInput').value;
-        const mensaje = prompt(`✍️ Mensaje para ${cat}:`);
+        const mensaje = prompt(`✍️ Mensaje para este álbum (${files.length} fotos):`);
         
         const label = document.getElementById('labelPost');
         const status = document.getElementById('status-msg');
         label.innerHTML = "⏳ PROCESANDO...";
         
         try {
-            status.innerHTML = "🎨 Comprimiendo...";
-            const compressedFile = await compressImage(file);
-            status.innerHTML = "🚀 Subiendo a la nube...";
-            const formData = new FormData();
-            formData.append("image", compressedFile);
-            const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method: "POST", body: formData });
-            const imgData = await res.json();
+            let urlsSubidas = [];
             
-            if (imgData.success) {
-                status.innerHTML = "📝 Guardando...";
+            for(let i=0; i < files.length; i++) {
+                status.innerHTML = `🎨 Procesando foto ${i+1} de ${files.length}...`;
+                const compressedFile = await compressImage(files[i]);
+                
+                status.innerHTML = `🚀 Subiendo foto ${i+1} de ${files.length}...`;
+                const formData = new FormData();
+                formData.append("image", compressedFile);
+                
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method: "POST", body: formData });
+                const imgData = await res.json();
+                
+                if (imgData.success) {
+                    urlsSubidas.push(imgData.data.url);
+                }
+            }
+
+            if (urlsSubidas.length > 0) {
+                status.innerHTML = "📝 Guardando álbum...";
                 await addDoc(collection(db, "mensajes"), {
                     texto: mensaje || "", 
-                    foto: imgData.data.url, 
+                    fotos: urlsSubidas, // AHORA ES UN ARRAY DE FOTOS
+                    foto: urlsSubidas[0], // Compatibilidad con versiones viejas
                     autor: nombre, 
                     categoria: cat, 
                     fecha: new Date(), 
                     likesBy: [], 
                     comentarios: []
                 });
+                
                 label.innerHTML = "✨ SUBIR NUEVO RECUERDO";
-                status.innerHTML = "✅ ¡Listo!";
+                status.innerHTML = "✅ ¡Álbum publicado!";
                 document.getElementById('upload-options').style.display = 'none';
                 document.getElementById('wa-notice').style.display = "block";
-                document.getElementById('wa-notice').href = `https://wa.me/?text=¡Nuevo+recuerdo+en+${cat}!`;
+                document.getElementById('wa-notice').href = `https://wa.me/?text=¡Nuevo+álbum+familiar+en+${cat}!`;
             }
         } catch (err) { 
             alert("Error: " + err.message);
@@ -261,7 +279,7 @@
         const postsAmostrar = todosLosPosts.filter(p => filtroActual === 'Todo' || p.categoria === filtroActual);
 
         if(postsAmostrar.length === 0) {
-            muro.innerHTML = `<div style="text-align:center; padding:30px; color:#94a3b8; font-size:14px;">Nada en "${filtroActual}"... ¡Sube la primera foto! 📸</div>`;
+            muro.innerHTML = `<div style="text-align:center; padding:30px; color:#94a3b8; font-size:14px;">Nada en "${filtroActual}"... ¡Sube el primer recuerdo! 📸</div>`;
             return;
         }
 
@@ -283,6 +301,26 @@
                 ultimoMes = mesActual;
             }
 
+            // --- LÓGICA DEL CARRUSEL ---
+            const fotosArray = data.fotos || [data.foto]; // Si no hay array, usa la foto única
+            let carruselHtml = "";
+            let dotsHtml = "";
+
+            if(fotosArray.length > 1) {
+                carruselHtml = `
+                    <div class="carousel-container">
+                        <div class="carousel-track" id="track-${data.id}" onscroll="updateDots('${data.id}')">
+                            ${fotosArray.map(f => `<img src="${f}" onclick="window.abrirLupa('${f}')">`).join('')}
+                        </div>
+                    </div>
+                `;
+                dotsHtml = `<div class="carousel-dots" id="dots-${data.id}">
+                    ${fotosArray.map((_, i) => `<div class="dot ${i===0?'active':''}"></div>`).join('')}
+                </div>`;
+            } else {
+                carruselHtml = `<img src="${fotosArray[0]}" onclick="window.abrirLupa('${fotosArray[0]}')" style="width:100%; border-radius:20px; margin-top:10px;">`;
+            }
+
             let comentariosHtml = data.comentarios ? data.comentarios.map(c => `<div class="comment"><b>${c.autor}:</b> ${c.texto}</div>`).join('') : "";
 
             muro.innerHTML += `
@@ -295,7 +333,9 @@
                         </div>
                     </div>
                     <p>${data.texto}</p>
-                    <img src="${data.foto}" onclick="window.abrirLupa('${data.foto}')">
+                    
+                    ${carruselHtml}
+                    ${dotsHtml}
                     
                     <button class="${claseLike}" onclick="darLike('${data.id}')">${textoLike}</button>
                     <div class="likes-list">${nombresLikes}</div>
@@ -310,22 +350,30 @@
         });
     }
 
+    // --- ACTUALIZAR PUNTITOS DEL CARRUSEL ---
+    window.updateDots = (postId) => {
+        const track = document.getElementById(`track-${postId}`);
+        const dotsContainer = document.getElementById(`dots-${postId}`);
+        if(!track || !dotsContainer) return;
+        
+        const index = Math.round(track.scrollLeft / track.offsetWidth);
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, i) => {
+            if(i === index) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    };
+
     window.darLike = async (id) => {
         const nombre = getNombre();
         if(!nombre) return;
-
         const docRef = doc(db, "mensajes", id);
         const docSnap = await getDoc(docRef);
-
         if (docSnap.exists()) {
             const data = docSnap.data();
             const lista = data.likesBy || [];
-
-            if (lista.includes(nombre)) {
-                await updateDoc(docRef, { likesBy: arrayRemove(nombre) });
-            } else {
-                await updateDoc(docRef, { likesBy: arrayUnion(nombre) });
-            }
+            if (lista.includes(nombre)) { await updateDoc(docRef, { likesBy: arrayRemove(nombre) }); } 
+            else { await updateDoc(docRef, { likesBy: arrayUnion(nombre) }); }
         }
     };
 
@@ -336,6 +384,7 @@
         await updateDoc(doc(db, "mensajes", id), { comentarios: arrayUnion({ autor: nombre, texto: input.value }) });
         input.value = "";
     };
+
     window.borrarPost = async (id) => {
         if(confirm("¿Borrar este recuerdo?")) await deleteDoc(doc(db, "mensajes", id));
     };
