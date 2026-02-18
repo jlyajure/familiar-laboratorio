@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Familia Yajure - Oficial V42</title>
+    <title>Familia Yajure - V43 Universal</title>
     <link rel="icon" type="image/png" href="https://img.icons8.com/emoji/192/house-with-garden.png">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; }
-        :root { --blue: #3b82f6; --bg: #0f172a; --red: #ef4444; }
+        :root { --blue: #3b82f6; --bg: #0f172a; --red: #dc2626; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: var(--bg); color: white; overflow-x: hidden; }
         
-        /* LOGIN CLÁSICO */
+        /* LOGIN */
         #login-screen { position: fixed; inset: 0; background: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover; display: flex; align-items: flex-start; justify-content: center; z-index: 9999; padding-top: 80px; }
         #login-screen::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
         .login-box { position: relative; background: rgba(15, 23, 42, 0.95); padding: 40px; border-radius: 30px; text-align: center; width: 90%; max-width: 320px; border: 1px solid rgba(255,255,255,0.2); }
@@ -24,7 +24,7 @@
 
         .container { max-width: 500px; margin: auto; padding: 15px; }
 
-        /* FILTROS (Barra Visible) */
+        /* FILTROS */
         .scroll { overflow-x: auto; white-space: nowrap; padding-bottom: 15px; display: flex; gap: 10px; }
         .scroll::-webkit-scrollbar { height: 5px; display: block; }
         .scroll::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 10px; }
@@ -36,15 +36,15 @@
         .sel { width: 100%; padding: 12px; border-radius: 12px; margin-bottom: 10px; font-weight: 800; background: white; color: black; border: none; }
         .btn-up { background: var(--blue); color: white; width: 100%; padding: 15px; border-radius: 15px; font-weight: 800; border: none; cursor: pointer; }
 
-        /* POSTS (Diseño Clásico con Flechas) */
+        /* POSTS */
         .card { background: white; border-radius: 25px; padding: 20px; margin-bottom: 25px; color: #0f172a; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         
+        /* Carrusel y Flechas */
         .c-wrap { position: relative; margin: 10px -20px; background: #000; overflow: hidden; }
         .c-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
         .c-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; aspect-ratio: 1/1; object-fit: cover; }
         
-        /* Flechas */
         .nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; font-weight: bold; color: black; border: none; }
         .prev { left: 10px; }
         .next { right: 10px; }
@@ -53,7 +53,7 @@
         .dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; }
         .dot.active { background: var(--blue); }
 
-        /* Botones Acción */
+        /* Botones */
         .trash { background: var(--red); color: white; border: none; padding: 5px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; font-weight: 800; }
         .like { background: none; border: none; font-size: 16px; cursor: pointer; color: #64748b; font-weight: 800; padding: 10px 0; display: flex; align-items: center; gap: 5px; }
         .like.yes { color: #ff0000 !important; }
@@ -110,13 +110,14 @@
     const K = "07dd4f0a1180673510c5047ae8b5eec8"; 
 
     // 1. LOGIN
-    window.onload = () => {
+    const check = () => {
         const a = localStorage.getItem('fa_key');
         if(a === "familia2026" || a === "ticoadmin2026") {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('app-content').style.display = 'block';
         }
     };
+    check();
 
     document.getElementById('passInput').oninput = (e) => {
         const v = e.target.value.toLowerCase();
@@ -129,6 +130,23 @@
     window.salir = () => { localStorage.clear(); location.reload(); };
 
     // 2. SUBIR FOTOS (Motor V37)
+    async function compressImage(file) {
+        return new Promise(resolve => {
+            const reader = new FileReader(); reader.readAsDataURL(file);
+            reader.onload = e => {
+                const img = new Image(); img.src = e.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const MAX = 1200; let w = img.width, h = img.height;
+                    if (w > MAX) { h *= MAX/w; w = MAX; }
+                    canvas.width = w; canvas.height = h;
+                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                    canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.8);
+                };
+            };
+        });
+    }
+
     document.getElementById('file').onchange = async (e) => {
         const files = e.target.files;
         if(files.length === 0) return;
@@ -146,8 +164,8 @@
         try {
             let urls = [];
             for(let file of files) {
-                st.innerText = "Procesando...";
-                const fd = new FormData(); fd.append("image", file);
+                st.innerText = "Cargando...";
+                const fd = new FormData(); fd.append("image", await compressImage(file));
                 const req = await fetch(`https://api.imgbb.com/1/upload?key=${K}`, {method:"POST", body:fd});
                 const res = await req.json();
                 if(res.success) urls.push(res.data.url);
@@ -163,7 +181,7 @@
         } catch(err) { alert("Error"); btn.disabled=false; }
     };
 
-    // 3. MURO CLÁSICO (Con Flechas y Carrusel)
+    // 3. MURO CLÁSICO (Con Flechas)
     let fNow = "Todo";
     let cache = [];
 
