@@ -13,7 +13,7 @@
         :root { --accent-blue: #3b82f6; --dark-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); --wa-green: #25d366; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; min-height: 100vh; background: var(--dark-bg); background-attachment: fixed; color: #f8fafc; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
         
-        /* LOGIN */
+        /* LOGIN SCREEN */
         #login-screen { position: fixed; inset: 0; background: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover; display: flex; align-items: flex-start; justify-content: center; z-index: 1000; padding-top: 100px; }
         #login-screen::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
         .login-card { position: relative; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15); padding: 40px 25px; border-radius: 35px; text-align: center; max-width: 320px; width: 90%; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
@@ -24,21 +24,20 @@
         header { background: rgba(15, 23, 42, 0.9); padding: 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
         .container { max-width: 480px; margin: auto; padding: 20px 15px; }
 
-        /* BOTONES DE FILTRO ESTILO ORIGINAL */
+        /* FILTROS */
         .filter-scroll { overflow-x: auto; white-space: nowrap; padding-bottom: 15px; margin-bottom: 20px; -webkit-overflow-scrolling: touch; }
         .filter-scroll::-webkit-scrollbar { display: none; }
-        .filter-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; margin-right: 10px; font-size: 14px; cursor: pointer; transition: 0.3s; font-weight: 600; }
+        .filter-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; margin-right: 10px; font-size: 14px; cursor: pointer; transition: 0.3s; font-weight: 600; display: inline-block; }
         .filter-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); font-weight: 800; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4); }
 
-        /* PANEL DE SUBIDA ELEGANTE */
-        .upload-section { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 30px; border: 1px dashed rgba(255,255,255,0.2); margin-bottom: 30px; text-align: center; }
-        .category-select { width: 100%; padding: 15px; border-radius: 18px; background: white; border: none; font-size: 14px; color: #1e293b; font-weight: 700; margin-bottom: 15px; cursor: pointer; }
-        .btn-post { background: var(--accent-blue); color: white; padding: 18px; border-radius: 20px; font-weight: 800; cursor: pointer; display: block; text-align: center; transition: 0.3s; border: none; width: 100%; font-size: 14px; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
-        .btn-post:hover { transform: translateY(-2px); background: #2563eb; }
+        /* PANEL SUBIDA */
+        .upload-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 30px; border: 1px dashed rgba(255,255,255,0.2); margin-bottom: 30px; }
+        .category-select { width: 100%; padding: 15px; border-radius: 18px; background: white; border: none; font-size: 14px; color: #1e293b; font-weight: 700; margin-bottom: 15px; }
+        .btn-post { background: var(--accent-blue); color: white; padding: 18px; border-radius: 20px; font-weight: 800; cursor: pointer; display: block; text-align: center; border: none; width: 100%; font-size: 14px; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
 
         #status-msg { text-align: center; font-size: 13px; color: #93c5fd; margin-bottom: 15px; font-weight: 800; min-height: 18px; }
 
-        /* POSTS Y CARRUSEL */
+        /* POSTS */
         .post { background: white; border-radius: 32px; padding: 20px; margin-bottom: 30px; color: #1e293b; box-shadow: 0 20px 40px rgba(0,0,0,0.3); overflow: hidden; }
         .post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .post-author { font-weight: 800; color: var(--accent-blue); font-size: 15px; }
@@ -47,13 +46,13 @@
         .carousel-container { position: relative; margin: 15px -20px; overflow: hidden; background: #f1f5f9; }
         .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
         .carousel-track::-webkit-scrollbar { display: none; }
-        .carousel-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; aspect-ratio: 1/1; object-fit: cover; cursor: zoom-in; }
+        .carousel-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; aspect-ratio: 1/1; object-fit: cover; }
         
         .carousel-dots { display: flex; justify-content: center; gap: 6px; margin: 12px 0; }
-        .dot { width: 7px; height: 7px; border-radius: 50%; background: #cbd5e1; transition: 0.3s; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: #cbd5e1; }
         .dot.active { background: var(--accent-blue); transform: scale(1.4); }
 
-        .btn-like { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; padding: 12px; border-radius: 15px; cursor: pointer; font-weight: 700; width: 100%; text-align: center; transition: 0.3s; }
+        .btn-like { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; padding: 12px; border-radius: 15px; cursor: pointer; font-weight: 700; width: 100%; text-align: center; }
         .btn-like.liked { background: #fff5f5; color: #ff4757; border-color: #ff4757; }
 
         .month-separator { background: rgba(59, 130, 246, 0.15); color: #93c5fd; padding: 10px; border-radius: 50px; font-size: 11px; font-weight: 800; text-align: center; margin: 40px 0 20px; border: 1px solid rgba(59, 130, 246, 0.2); letter-spacing: 2px; text-transform: uppercase; }
@@ -68,28 +67,27 @@
     <div class="login-card">
         <div style="font-size: 50px; margin-bottom: 10px;">🌅</div>
         <h2 style="color: white; margin: 0; font-size: 22px;">Familia Yajure</h2>
-        <p style="color: #94a3b8; font-size: 14px; margin-top: 5px;">Recuerdos Compartidos</p>
-        <input type="password" id="passInput" placeholder="Escribe la clave aquí...">
+        <input type="password" id="passInput" placeholder="Clave de acceso">
     </div>
 </div>
 
 <div id="app-content">
     <header>
-        <span style="font-weight: 800; color: white; letter-spacing: -0.5px;">Familia Yajure</span>
-        <button onclick="localStorage.removeItem('familia_auth'); location.reload();" style="background: rgba(255,255,255,0.1); color: #cbd5e1; border: none; padding: 8px 15px; border-radius: 12px; font-size: 12px; font-weight: 600; cursor: pointer;">Cerrar Sesión 🔒</button>
+        <span style="font-weight: 800; color: white;">Familia Yajure</span>
+        <button onclick="window.salirApp()" style="background: rgba(255,255,255,0.1); color: #cbd5e1; border: none; padding: 8px 15px; border-radius: 12px; font-size: 12px; font-weight: 600; cursor: pointer;">Salir 🔒</button>
     </header>
 
     <div class="container">
-        <div class="filter-scroll">
-            <button class="filter-btn active" onclick="filtrar('Todo')">Todo</button>
-            <button class="filter-btn" onclick="filtrar('Familia')">🏠 Familia</button>
-            <button class="filter-btn" onclick="filtrar('Fiestas')">🎉 Fiestas</button>
-            <button class="filter-btn" onclick="filtrar('Viajes')">✈️ Viajes</button>
-            <button class="filter-btn" onclick="filtrar('Recuerdos')">📜 Recuerdos</button>
-            <button class="filter-btn" onclick="filtrar('Jodedera')">🤣 Jodedera</button>
+        <div class="filter-scroll" id="filterContainer">
+            <button class="filter-btn active" onclick="window.filtrar('Todo')">Todo</button>
+            <button class="filter-btn" onclick="window.filtrar('Familia')">🏠 Familia</button>
+            <button class="filter-btn" onclick="window.filtrar('Fiestas')">🎉 Fiestas</button>
+            <button class="filter-btn" onclick="window.filtrar('Viajes')">✈️ Viajes</button>
+            <button class="filter-btn" onclick="window.filtrar('Recuerdos')">📜 Recuerdos</button>
+            <button class="filter-btn" onclick="window.filtrar('Jodedera')">🤣 Jodedera</button>
         </div>
 
-        <div class="upload-section">
+        <div class="upload-card">
             <select id="categoriaInput" class="category-select">
                 <option value="Familia">🏠 Álbum de Familia</option>
                 <option value="Fiestas">🎉 Fiestas y Rumbas</option>
@@ -98,7 +96,6 @@
                 <option value="Jodedera">🤣 Jodedera y Risas</option>
             </select>
             <button class="btn-post" id="btnTrigger" onclick="document.getElementById('fotoInput').click()">SELECCIONAR FOTOS 📸</button>
-            <p style="font-size: 10px; color: #64748b; margin-top: 10px; font-weight: 600;">(Puedes elegir hasta 10 fotos a la vez)</p>
         </div>
 
         <div id="status-msg"></div>
@@ -131,6 +128,8 @@
         if(v === CLAVE_NORMAL || v === CLAVE_ADMIN) { localStorage.setItem('familia_auth', v); location.reload(); }
     };
 
+    window.salirApp = () => { localStorage.removeItem('familia_auth'); location.reload(); };
+
     // SUBIDA
     document.getElementById('fotoInput').onchange = async (e) => {
         const files = Array.from(e.target.files);
@@ -145,14 +144,13 @@
         const status = document.getElementById('status-msg');
         const btn = document.getElementById('btnTrigger');
 
-        status.innerHTML = "⏳ Iniciando subida...";
         btn.disabled = true;
-        btn.innerHTML = "PROCESANDO...";
+        btn.innerHTML = "⌛ SUBIENDO...";
 
         try {
             let urls = [];
             for(let i=0; i < files.length; i++) {
-                status.innerHTML = `🚀 Subiendo foto ${i+1} de ${files.length}...`;
+                status.innerHTML = `🚀 Procesando foto ${i+1} de ${files.length}...`;
                 const compressed = await compress(files[i]);
                 const fd = new FormData();
                 fd.append("image", compressed);
@@ -167,10 +165,10 @@
                     autor: nombre, categoria: cat, fecha: new Date(),
                     likesBy: [], comentarios: []
                 });
-                status.innerHTML = "✅ ¡Publicado correctamente!";
+                status.innerHTML = "✅ ¡Publicado!";
                 setTimeout(() => { status.innerHTML = ""; btn.disabled = false; btn.innerHTML = "SELECCIONAR FOTOS 📸"; }, 3000);
             }
-        } catch(err) { alert("Error al subir"); btn.disabled = false; }
+        } catch(err) { alert("Error al subir"); btn.disabled = false; btn.innerHTML = "SELECCIONAR FOTOS 📸"; }
     };
 
     async function compress(file) {
@@ -191,12 +189,16 @@
         });
     }
 
-    // FILTROS
+    // FILTROS SIN REBOTES
     let filtroActual = "Todo";
     window.filtrar = (cat) => {
         filtroActual = cat;
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        event.target.classList.add('active');
+        // Actualizar visual de botones
+        const btns = document.querySelectorAll('.filter-btn');
+        btns.forEach(b => {
+            b.classList.remove('active');
+            if(b.innerText.includes(cat) || (cat==='Todo' && b.innerText==='Todo')) b.classList.add('active');
+        });
         renderMuro();
     };
 
@@ -216,6 +218,11 @@
 
         const filtrados = postsData.filter(p => filtroActual === "Todo" || p.categoria === filtroActual);
 
+        if(filtrados.length === 0) {
+            muro.innerHTML = `<p style="text-align:center; color:#94a3b8; margin-top:30px;">No hay fotos en "${filtroActual}" aún.</p>`;
+            return;
+        }
+
         filtrados.forEach(d => {
             const fecha = d.fecha ? d.fecha.toDate() : new Date();
             const mes = fecha.toLocaleDateString('es',{month:'long', year:'numeric'});
@@ -226,23 +233,23 @@
             let dotsContent = "";
 
             if(fotos.length > 1) {
-                mediaContent = `<div class="carousel-container"><div class="carousel-track" id="t-${d.id}" onscroll="updateDots('${d.id}')">${fotos.map(f => `<img src="${f}" onclick="abrirLupa('${f}')">`).join('')}</div></div>`;
+                mediaContent = `<div class="carousel-container"><div class="carousel-track" id="t-${d.id}" onscroll="window.updateDots('${d.id}')">${fotos.map(f => `<img src="${f}" onclick="window.abrirLupa('${f}')">`).join('')}</div></div>`;
                 dotsContent = `<div class="carousel-dots" id="d-${d.id}">${fotos.map((_,i)=>`<div class="dot ${i===0?'active':''}"></div>`).join('')}</div>`;
             } else {
-                mediaContent = `<img src="${fotos[0]}" onclick="abrirLupa('${fotos[0]}')" style="width:100%; border-radius:20px; margin-top:10px; aspect-ratio:1/1; object-fit:cover;">`;
+                mediaContent = `<img src="${fotos[0]}" onclick="window.abrirLupa('${fotos[0]}')" style="width:100%; border-radius:20px; margin-top:10px; aspect-ratio:1/1; object-fit:cover;">`;
             }
 
             muro.innerHTML += `
                 <div class="post">
                     <div class="post-header">
                         <span class="post-author">👤 ${d.autor}<span class="post-cat">${d.categoria}</span></span>
-                        ${esAdmin ? `<button onclick="borrar('${d.id}')" style="background:none; border:none; color:red; font-weight:800; cursor:pointer;">🗑️ Borrar</button>` : ''}
+                        ${esAdmin ? `<button onclick="window.borrar('${d.id}')" style="background:none; border:none; color:red; font-size:12px; font-weight:800; cursor:pointer;">🗑️ Borrar</button>` : ''}
                     </div>
-                    <p style="margin:10px 0; line-height:1.5;">${d.texto}</p>
+                    <p style="margin:10px 0; font-size:14px;">${d.texto}</p>
                     ${mediaContent}${dotsContent}
-                    <button class="btn-like ${d.likesBy?.includes(miNombre)?'liked':''}" onclick="like('${d.id}')">❤️ Me gusta (${d.likesBy?.length || 0})</button>
-                    <div style="font-size:11px; color:#64748b; margin-top:8px; padding-left:5px;">
-                        ${d.likesBy?.length > 0 ? 'Le gusta a: ' + d.likesBy.join(', ') : ''}
+                    <button class="btn-like ${d.likesBy?.includes(miNombre)?'liked':''}" onclick="window.like('${d.id}')">❤️ Me gusta (${d.likesBy?.length || 0})</button>
+                    <div style="font-size:11px; color:#64748b; margin-top:8px;">
+                        ${d.likesBy?.length > 0 ? 'A ' + d.likesBy.join(', ') + ' les gusta esto.' : ''}
                     </div>
                 </div>`;
         });
@@ -250,6 +257,7 @@
 
     window.updateDots = (id) => {
         const t = document.getElementById('t-'+id);
+        if(!t) return;
         const idx = Math.round(t.scrollLeft / t.offsetWidth);
         const dots = document.getElementById('d-'+id).querySelectorAll('.dot');
         dots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
@@ -266,7 +274,7 @@
         else await updateDoc(ref, { likesBy: arrayUnion(n) });
     };
 
-    window.borrar = async (id) => { if(confirm("¿Borrar recuerdo para siempre?")) await deleteDoc(doc(db, "mensajes", id)); };
+    window.borrar = async (id) => { if(confirm("¿Borrar definitivamente?")) await deleteDoc(doc(db, "mensajes", id)); };
 </script>
 </body>
 </html>
