@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
-    <title>Familia - Laboratorio</title>
+    <title>Familia - Laboratorio V15.1</title>
     <meta name="apple-mobile-web-app-title" content="Familia">
     <meta name="application-name" content="Familia">
     
@@ -31,44 +31,37 @@
         .filter-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 20px; margin-right: 8px; font-size: 13px; cursor: pointer; transition: 0.3s; }
         .filter-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); font-weight: 800; }
 
-        /* PANEL DE SUBIDA MEJORADO (SIN REBOTES) */
-        .upload-box { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 28px; margin-bottom: 25px; border: 1px dashed rgba(255,255,255,0.2); }
-        .category-select { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 15px; background: white; border: none; font-size: 14px; color: #1e293b; font-weight: 600; }
-        .btn-post { background: var(--accent-blue); color: white; padding: 16px; border-radius: 18px; font-weight: 700; cursor: pointer; display: block; text-align: center; transition: 0.3s; }
-        .btn-post:active { transform: scale(0.95); }
+        /* PANEL DE SUBIDA */
+        .upload-box { background: rgba(255,255,255,0.08); padding: 20px; border-radius: 28px; margin-bottom: 25px; border: 1px dashed rgba(255,255,255,0.3); }
+        .category-select { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 15px; background: white; border: 2px solid #3b82f6; font-size: 14px; color: #1e293b; font-weight: 700; cursor: pointer; display: block !important; visibility: visible !important; }
+        .btn-post { background: var(--accent-blue); color: white; padding: 16px; border-radius: 18px; font-weight: 700; cursor: pointer; display: block; text-align: center; transition: 0.3s; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
+        
+        #status-msg { text-align: center; font-size: 14px; color: #3b82f6; margin-bottom: 15px; min-height: 20px; font-weight: 800; background: rgba(255,255,255,0.9); border-radius: 10px; padding: 5px; display: none; }
+        #wa-notice { display: none; background: var(--wa-green); color: white; padding: 15px; border-radius: 22px; text-align: center; font-weight: 800; text-decoration: none; margin-bottom: 25px; }
 
-        #status-msg { text-align: center; font-size: 12px; color: #94a3b8; margin-bottom: 15px; min-height: 15px; font-weight: 600; }
-        #wa-notice { display: none; background: var(--wa-green); color: white; padding: 15px; border-radius: 22px; text-align: center; font-weight: 800; text-decoration: none; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(37,211,102,0.3); }
-
-        /* POST Y CARRUSEL TIPO INSTAGRAM */
+        /* POST Y CARRUSEL */
         .post { background: white; border-radius: 28px; padding: 20px; margin-bottom: 25px; color: #1e293b; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.3); overflow: hidden; }
         .post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .post-author { font-weight: 800; color: var(--accent-blue); font-size: 14px; }
         .category-badge { font-size: 10px; background: #e0f2fe; color: #0284c7; padding: 4px 8px; border-radius: 8px; font-weight: 700; margin-left: 8px; text-transform: uppercase; }
         .post-date { font-size: 11px; color: #94a3b8; font-weight: 600; }
-        .btn-delete-admin { background: #ff4757; color: white; border: none; padding: 6px 10px; border-radius: 10px; cursor: pointer; }
 
         .carousel-container { position: relative; width: calc(100% + 40px); margin-left: -20px; margin-top: 10px; margin-bottom: 10px; }
         .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
         .carousel-track::-webkit-scrollbar { display: none; }
         .carousel-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; object-fit: cover; aspect-ratio: 1/1; cursor: pointer; }
         
-        .carousel-dots { display: flex; justify: center; gap: 5px; margin: 10px 0; justify-content: center; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; transition: 0.3s; }
+        .carousel-dots { display: flex; justify-content: center; gap: 5px; margin: 10px 0; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; }
         .dot.active { background: var(--accent-blue); transform: scale(1.3); }
 
-        .btn-like { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 700; width: 100%; text-align: left; margin-bottom: 5px; }
+        .btn-like { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 700; width: 100%; text-align: left; }
         .btn-like.liked { background: #fff5f5; color: #ff4757; border-color: #ff4757; }
-        .likes-list { font-size: 11px; color: #64748b; margin-bottom: 15px; font-style: italic; }
-        .comments-section { background: #f8fafc; padding: 12px; border-radius: 18px; }
+        .comments-section { background: #f8fafc; padding: 12px; border-radius: 18px; margin-top: 10px; }
         .comment { font-size: 13px; margin-bottom: 6px; border-bottom: 1px solid #edf2f7; padding-bottom: 4px; }
-        .comment-input-group { display: flex; gap: 8px; margin-top: 10px; }
-        .comment-input { flex: 1; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px; font-size: 13px; }
-        .btn-send-comment { background: var(--accent-blue); color: white; border: none; padding: 8px 12px; border-radius: 10px; cursor: pointer; }
-
+        
         #photo-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; justify-content: center; align-items: center; }
         #modal-img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        #close-modal-btn { position: fixed; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 5001; background: rgba(0,0,0,0.5); width: 45px; height: 45px; text-align: center; line-height: 45px; border-radius: 50%; border: 2px solid white; }
     </style>
 </head>
 <body>
@@ -76,15 +69,14 @@
 <div id="login-screen">
     <div class="login-card">
         <div style="font-size: 45px; margin-bottom: 15px;">🌅</div>
-        <h2 style="color: white; margin: 0;">Bienvenido a Nuestros Recuerdos</h2>
-        <p style="color: #cbd5e1; margin-top: 5px;">Familia Yajure</p>
+        <h2 style="color: white; margin: 0;">Familia Yajure</h2>
         <input type="password" id="passInput" placeholder="Clave de acceso">
     </div>
 </div>
 
 <div id="app-content">
     <header>
-        <h1 style="font-size: 18px; margin:0; color:white;">Familia Yajure</h1>
+        <h1 style="font-size: 18px; margin:0; color:white;">Recuerdos Familiares</h1>
         <button onclick="localStorage.removeItem('familia_auth'); location.reload();" style="background:rgba(255,255,255,0.1); color:#94a3b8; border:none; padding:10px; border-radius:10px; cursor:pointer;">Salir 🔒</button>
     </header>
     <div class="container">
@@ -97,10 +89,8 @@
             <button class="filter-btn" onclick="filtrar('Jodedera')">🤣 Jodedera</button>
         </div>
 
-        <a id="wa-notice" href="#" target="_blank">📢 ¡AVISAR POR WHATSAPP!</a>
-        
         <div class="upload-box">
-            <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 0; margin-bottom: 10px;">1. Selecciona la categoría:</p>
+            <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-bottom: 8px;">1. Selecciona la categoría:</p>
             <select id="categoriaInput" class="category-select">
                 <option value="Familia">🏠 Familia</option>
                 <option value="Fiestas">🎉 Fiestas</option>
@@ -109,7 +99,6 @@
                 <option value="Jodedera">🤣 Jodedera</option>
             </select>
             <label for="fotoInput" id="labelPost" class="btn-post">2. SELECCIONAR FOTOS 📸</label>
-            <p style="text-align: center; font-size: 10px; color: #64748b; margin-top: 10px;">(Puedes elegir varias fotos de una vez)</p>
         </div>
 
         <div id="status-msg"></div>
@@ -119,8 +108,7 @@
     </div>
 </div>
 
-<div id="photo-modal">
-    <div id="close-modal-btn" onclick="cerrarLupa()">✕</div>
+<div id="photo-modal" onclick="this.style.display='none'">
     <img id="modal-img" src="">
 </div>
 
@@ -137,7 +125,7 @@
 
     const getNombre = () => {
         let n = localStorage.getItem('user_n');
-        if(!n) { n = prompt("👤 Escribe tu nombre para identificarte:"); if(n) localStorage.setItem('user_n', n); }
+        if(!n) { n = prompt("👤 Escribe tu nombre:"); if(n) localStorage.setItem('user_n', n); }
         return n;
     };
 
@@ -156,15 +144,11 @@
     };
 
     window.abrirLupa = (url) => {
-        const modal = document.getElementById('photo-modal');
-        const img = document.getElementById('modal-img');
-        img.src = url;
-        modal.style.display = 'flex';
+        document.getElementById('modal-img').src = url;
+        document.getElementById('photo-modal').style.display = 'flex';
     };
 
-    window.cerrarLupa = () => { document.getElementById('photo-modal').style.display = 'none'; };
-
-    // --- SUBIDA MÚLTIPLE ---
+    // --- CORRECCIÓN SUBIDA ---
     document.getElementById('fotoInput').onchange = async (e) => {
         const files = Array.from(e.target.files);
         if (files.length === 0) return;
@@ -172,16 +156,18 @@
         if (!nombre) return;
         
         const cat = document.getElementById('categoriaInput').value;
-        const mensaje = prompt(`✍️ Escribe un mensaje para este álbum (${files.length} fotos):`);
+        const mensaje = prompt(`✍️ Mensaje para este álbum (${files.length} fotos):`);
         
         const label = document.getElementById('labelPost');
         const status = document.getElementById('status-msg');
+        
+        status.style.display = "block";
         label.innerHTML = "⏳ SUBIENDO...";
         
         try {
             let urlsSubidas = [];
             for(let i=0; i < files.length; i++) {
-                status.innerHTML = `🎨 Procesando ${i+1}/${files.length}...`;
+                status.innerHTML = `🚀 Subiendo foto ${i+1} de ${files.length}...`;
                 const compressedFile = await compressImage(files[i]);
                 const formData = new FormData();
                 formData.append("image", compressedFile);
@@ -192,19 +178,13 @@
 
             if (urlsSubidas.length > 0) {
                 await addDoc(collection(db, "mensajes"), {
-                    texto: mensaje || "", 
-                    fotos: urlsSubidas, 
-                    foto: urlsSubidas[0], 
-                    autor: nombre, 
-                    categoria: cat, 
-                    fecha: new Date(), 
-                    likesBy: [], 
-                    comentarios: []
+                    texto: mensaje || "", fotos: urlsSubidas, foto: urlsSubidas[0], 
+                    autor: nombre, categoria: cat, fecha: new Date(), likesBy: [], comentarios: []
                 });
-                status.innerHTML = "✅ ¡Publicado!";
+                status.innerHTML = "✅ ¡Álbum Publicado con éxito!";
+                setTimeout(() => status.style.display = "none", 3000);
                 label.innerHTML = "2. SELECCIONAR FOTOS 📸";
-                document.getElementById('wa-notice').style.display = "block";
-                document.getElementById('wa-notice').href = `https://wa.me/?text=¡Nuevo+álbum+familiar+en+${cat}!`;
+                e.target.value = ""; // Limpiar input
             }
         } catch (err) { alert("Error: " + err.message); label.innerHTML = "2. SELECCIONAR FOTOS 📸"; }
     };
@@ -213,9 +193,9 @@
         return new Promise((resolve) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onload = (event) => {
+            reader.onload = (ev) => {
                 const img = new Image();
-                img.src = event.target.result;
+                img.src = ev.target.result;
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
                     const MAX = 1200;
@@ -239,8 +219,7 @@
     };
 
     onSnapshot(query(collection(db, "mensajes"), orderBy("fecha", "desc")), (snapshot) => {
-        todosLosPosts = [];
-        snapshot.forEach((doc) => todosLosPosts.push({ id: doc.id, ...doc.data() }));
+        todosLosPosts = []; snapshot.forEach((doc) => todosLosPosts.push({ id: doc.id, ...doc.data() }));
         pintarMuro();
     });
 
@@ -250,62 +229,38 @@
         const esAdmin = localStorage.getItem('familia_auth') === "ticoadmin2026";
         const miNombre = localStorage.getItem('user_n'); 
         let ultimoMes = "";
-
         const postsAmostrar = todosLosPosts.filter(p => filtroActual === 'Todo' || p.categoria === filtroActual);
 
         postsAmostrar.forEach((data) => {
             const fechaObj = data.fecha ? data.fecha.toDate() : new Date();
             const mesActual = fechaObj.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
-            const fechaCorta = fechaObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
-            
-            const listaLikes = data.likesBy || [];
-            const yaDiLike = listaLikes.includes(miNombre); 
-            const textoLike = yaDiLike ? `❤️ Te gusta (${listaLikes.length})` : `🤍 Me gusta (${listaLikes.length})`;
-
-            if (mesActual !== ultimoMes) {
-                muro.innerHTML += `<div class="month-separator">${mesActual}</div>`;
-                ultimoMes = mesActual;
-            }
+            if (mesActual !== ultimoMes) { muro.innerHTML += `<div class="month-separator">${mesActual}</div>`; ultimoMes = mesActual; }
 
             const fotosArray = data.fotos || [data.foto];
             let carruselHtml = "";
             let dotsHtml = "";
 
             if(fotosArray.length > 1) {
-                carruselHtml = `
-                    <div class="carousel-container">
-                        <div class="carousel-track" id="track-${data.id}" onscroll="updateDots('${data.id}')">
-                            ${fotosArray.map(f => `<img src="${f}" onclick="window.abrirLupa('${f}')">`).join('')}
-                        </div>
-                    </div>
-                `;
-                dotsHtml = `<div class="carousel-dots" id="dots-${data.id}">
-                    ${fotosArray.map((_, i) => `<div class="dot ${i===0?'active':''}"></div>`).join('')}
-                </div>`;
+                carruselHtml = `<div class="carousel-container"><div class="carousel-track" id="track-${data.id}" onscroll="updateDots('${data.id}')">${fotosArray.map(f => `<img src="${f}" onclick="window.abrirLupa('${f}')">`).join('')}</div></div>`;
+                dotsHtml = `<div class="carousel-dots" id="dots-${data.id}">${fotosArray.map((_, i) => `<div class="dot ${i===0?'active':''}"></div>`).join('')}</div>`;
             } else {
                 carruselHtml = `<img src="${fotosArray[0]}" onclick="window.abrirLupa('${fotosArray[0]}')" style="width:100%; border-radius:20px; margin-top:10px; aspect-ratio:1/1; object-fit:cover;">`;
             }
-
-            let comentariosHtml = data.comentarios ? data.comentarios.map(c => `<div class="comment"><b>${c.autor}:</b> ${c.texto}</div>`).join('') : "";
 
             muro.innerHTML += `
                 <div class="post">
                     <div class="post-header">
                         <span class="post-author">👤 ${data.autor} <span class="category-badge">${data.categoria}</span></span>
-                        <div>
-                            <span class="post-date">${fechaCorta}</span>
-                            ${esAdmin ? `<button class="btn-delete-admin" onclick="window.borrarPost('${data.id}')">🗑️</button>` : ""}
-                        </div>
+                        <div>${esAdmin ? `<button style="background:red;color:white;border:none;border-radius:5px;" onclick="window.borrarPost('${data.id}')">🗑️</button>` : ""}</div>
                     </div>
                     <p>${data.texto}</p>
-                    ${carruselHtml}
-                    ${dotsHtml}
-                    <button class="btn-like ${yaDiLike?'liked':''}" onclick="darLike('${data.id}')">${textoLike}</button>
-                    <div class="likes-list">${listaLikes.length>0 ? 'Le gusta a: '+listaLikes.join(', ') : ''}</div>
-                    <div class="comments-section">${comentariosHtml}
+                    ${carruselHtml}${dotsHtml}
+                    <button class="btn-like ${data.likesBy?.includes(miNombre)?'liked':''}" onclick="darLike('${data.id}')">❤️ Me gusta (${data.likesBy?.length || 0})</button>
+                    <div class="comments-section">
+                        ${(data.comentarios || []).map(c => `<div class="comment"><b>${c.autor}:</b> ${c.texto}</div>`).join('')}
                         <div class="comment-input-group">
                             <input type="text" id="input-${data.id}" class="comment-input" placeholder="Opinar...">
-                            <button class="btn-send-comment" onclick="enviarComentario('${data.id}')">Publicar</button>
+                            <button style="background:#3b82f6;color:white;border:none;padding:8px;border-radius:8px;" onclick="enviarComentario('${data.id}')">Puntuar</button>
                         </div>
                     </div>
                 </div>`;
@@ -314,10 +269,8 @@
 
     window.updateDots = (postId) => {
         const track = document.getElementById(`track-${postId}`);
-        const dotsContainer = document.getElementById(`dots-${postId}`);
-        if(!track || !dotsContainer) return;
         const index = Math.round(track.scrollLeft / track.offsetWidth);
-        const dots = dotsContainer.querySelectorAll('.dot');
+        const dots = document.getElementById(`dots-${postId}`).querySelectorAll('.dot');
         dots.forEach((dot, i) => i === index ? dot.classList.add('active') : dot.classList.remove('active'));
     };
 
@@ -325,11 +278,9 @@
         const nombre = getNombre();
         const docRef = doc(db, "mensajes", id);
         const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            const lista = docSnap.data().likesBy || [];
-            if (lista.includes(nombre)) await updateDoc(docRef, { likesBy: arrayRemove(nombre) });
-            else await updateDoc(docRef, { likesBy: arrayUnion(nombre) });
-        }
+        const lista = docSnap.data().likesBy || [];
+        if (lista.includes(nombre)) await updateDoc(docRef, { likesBy: arrayRemove(nombre) });
+        else await updateDoc(docRef, { likesBy: arrayUnion(nombre) });
     };
 
     window.enviarComentario = async (id) => {
@@ -340,7 +291,7 @@
         input.value = "";
     };
 
-    window.borrarPost = async (id) => { if(confirm("¿Borrar este recuerdo?")) await deleteDoc(doc(db, "mensajes", id)); };
+    window.borrarPost = async (id) => { if(confirm("¿Borrar?")) await deleteDoc(doc(db, "mensajes", id)); };
 </script>
 </body>
 </html>
