@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Familia Yajure - Oficial V23</title>
+    <title>Familia Yajure - Oficial V24</title>
     <link rel="icon" type="image/png" href="https://img.icons8.com/emoji/192/house-with-garden.png">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
@@ -20,7 +20,7 @@
 
         /* APP */
         #app-content { display: none; min-height: 100vh; padding-bottom: 50px; }
-        header { background: #1e293b; padding: 15px 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        header { background: #1e293b; padding: 15px 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .container { max-width: 500px; margin: auto; padding: 15px; }
 
         /* FILTROS */
@@ -43,9 +43,11 @@
         .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; }
         .dot.active { background: var(--accent-blue); }
 
-        /* LIKE Y COMENTARIOS ESTILO LIMPIO */
-        .btn-like { background: none; border: none; font-size: 18px; cursor: pointer; padding: 5px 0; display: flex; align-items: center; gap: 8px; color: #64748b; font-weight: 800; }
+        /* BOTONES */
+        .btn-like { background: none; border: none; font-size: 16px; cursor: pointer; padding: 5px 0; display: flex; align-items: center; gap: 8px; color: #64748b; font-weight: 800; }
         .btn-like.liked { color: #ff4757; }
+        .btn-delete { background: none; border: none; color: #ff4757; cursor: pointer; font-size: 16px; padding: 0; }
+
         .likes-names { font-size: 11px; color: #94a3b8; margin: 5px 0 10px; font-style: italic; }
 
         .comments-box { background: #f8fafc; border-radius: 15px; padding: 10px; margin-top: 10px; }
@@ -103,7 +105,7 @@
 
 <script type="module">
     import { db } from "./firebase.js";
-    import { collection, addDoc, query, orderBy, onSnapshot, updateDoc, doc, arrayUnion, arrayRemove, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { collection, addDoc, query, orderBy, onSnapshot, updateDoc, doc, arrayUnion, arrayRemove, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const C1 = "familia2026", C2 = "ticoadmin2026", KEY = "07dd4f0a1180673510c5047ae8b5eec8";
 
@@ -146,6 +148,7 @@
     function render() {
         const muro = document.getElementById('muro'); muro.innerHTML = "";
         const miN = localStorage.getItem('user_n');
+        const esAdmin = localStorage.getItem('familia_auth') === C2;
         const filtered = postsCache.filter(p => fActual === "Todo" || p.categoria === fActual);
 
         filtered.forEach(d => {
@@ -163,7 +166,10 @@
 
             muro.innerHTML += `
                 <div class="post">
-                    <span style="font-weight:800; color:#3b82f6;">👤 ${d.autor} <small style="color:#94a3b8">(${d.categoria})</small></span>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:800; color:#3b82f6;">👤 ${d.autor} <small style="color:#94a3b8">(${d.categoria})</small></span>
+                        ${esAdmin ? `<button class="btn-delete" onclick="window.borrarPost('${d.id}')">🗑️</button>` : ''}
+                    </div>
                     <p style="margin:8px 0; font-size:14px;">${d.texto}</p>
                     ${media}
                     <button class="btn-like ${yaLike?'liked':''}" onclick="window.like('${d.id}')">${yaLike?'❤️':'🤍'} Me gusta (${d.likesBy?.length || 0})</button>
@@ -171,7 +177,7 @@
                     <div class="comments-box">
                         ${commentsHtml}
                         <div class="comment-input-group">
-                            <input type="text" id="in-${d.id}" class="comment-input" placeholder="Escribe un comentario...">
+                            <input type="text" id="in-${d.id}" class="comment-input" placeholder="Comentar...">
                             <button class="btn-comment" onclick="window.comentar('${d.id}')">Enviar</button>
                         </div>
                     </div>
@@ -191,6 +197,8 @@
         await updateDoc(doc(db, "mensajes", id), { comentarios: arrayUnion({ autor: n, texto: input.value }) });
         input.value = "";
     };
+
+    window.borrarPost = async (id) => { if(confirm("¿Eliminar este recuerdo?")) await deleteDoc(doc(db, "mensajes", id)); };
 </script>
 </body>
 </html>
