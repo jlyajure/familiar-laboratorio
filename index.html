@@ -3,41 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Familia Yajure - Clásica V41</title>
+    <title>Familia Yajure - Oficial V42</title>
     <link rel="icon" type="image/png" href="https://img.icons8.com/emoji/192/house-with-garden.png">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; }
-        :root { --accent: #3b82f6; --bg: #0f172a; --red: #dc2626; }
+        :root { --blue: #3b82f6; --bg: #0f172a; --red: #ef4444; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: var(--bg); color: white; overflow-x: hidden; }
         
-        /* 1. LOGIN (El que no falla) */
+        /* LOGIN CLÁSICO */
         #login-screen { position: fixed; inset: 0; background: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover; display: flex; align-items: flex-start; justify-content: center; z-index: 9999; padding-top: 80px; }
         #login-screen::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
         .login-box { position: relative; background: rgba(15, 23, 42, 0.95); padding: 40px; border-radius: 30px; text-align: center; width: 90%; max-width: 320px; border: 1px solid rgba(255,255,255,0.2); }
-        input { width: 100%; padding: 15px; border-radius: 15px; border: 2px solid var(--accent); background: #1e293b; color: white; text-align: center; font-size: 18px; margin-top: 20px; outline: none; }
+        input { width: 100%; padding: 15px; border-radius: 15px; border: 2px solid var(--blue); background: #1e293b; color: white; text-align: center; font-size: 18px; margin-top: 20px; outline: none; }
 
-        /* 2. HEADER */
+        /* HEADER */
         header { background: #1e293b; padding: 15px 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
         .btn-out { background: var(--red); color: white; border: none; padding: 8px 15px; border-radius: 10px; font-weight: 800; cursor: pointer; }
 
         .container { max-width: 500px; margin: auto; padding: 15px; }
 
-        /* 3. FILTROS (Con barra visible) */
+        /* FILTROS (Barra Visible) */
         .scroll { overflow-x: auto; white-space: nowrap; padding-bottom: 15px; display: flex; gap: 10px; }
         .scroll::-webkit-scrollbar { height: 5px; display: block; }
-        .scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
-        
+        .scroll::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 10px; }
         .chip { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
-        .chip.active { background: var(--accent); border-color: var(--accent); }
+        .chip.active { background: var(--blue); border-color: var(--blue); }
 
-        /* 4. SUBIDA */
+        /* UPLOAD */
         .upload { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 25px; border: 2px dashed rgba(255,255,255,0.2); margin-bottom: 25px; text-align: center; }
         .sel { width: 100%; padding: 12px; border-radius: 12px; margin-bottom: 10px; font-weight: 800; background: white; color: black; border: none; }
-        .btn-up { background: var(--accent); color: white; width: 100%; padding: 15px; border-radius: 15px; font-weight: 800; border: none; cursor: pointer; }
+        .btn-up { background: var(--blue); color: white; width: 100%; padding: 15px; border-radius: 15px; font-weight: 800; border: none; cursor: pointer; }
 
-        /* 5. EL CARRUSEL CLÁSICO CON FLECHAS */
+        /* POSTS (Diseño Clásico con Flechas) */
         .card { background: white; border-radius: 25px; padding: 20px; margin-bottom: 25px; color: #0f172a; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         
@@ -45,19 +44,20 @@
         .c-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
         .c-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; aspect-ratio: 1/1; object-fit: cover; }
         
-        /* FLECHAS DE NAVEGACIÓN */
+        /* Flechas */
         .nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; font-weight: bold; color: black; border: none; }
         .prev { left: 10px; }
         .next { right: 10px; }
 
         .dots { display: flex; justify-content: center; gap: 5px; margin-top: 10px; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; }
-        .dot.active { background: var(--accent); }
+        .dot.active { background: var(--blue); }
 
-        /* 6. BOTONES ROJOS */
+        /* Botones Acción */
         .trash { background: var(--red); color: white; border: none; padding: 5px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; font-weight: 800; }
         .like { background: none; border: none; font-size: 16px; cursor: pointer; color: #64748b; font-weight: 800; padding: 10px 0; display: flex; align-items: center; gap: 5px; }
         .like.yes { color: #ff0000 !important; }
+        .like.yes span { color: #ff0000 !important; }
     </style>
 </head>
 <body>
@@ -128,7 +128,7 @@
     
     window.salir = () => { localStorage.clear(); location.reload(); };
 
-    // 2. SUBIR FOTOS (CÓDIGO CLÁSICO)
+    // 2. SUBIR FOTOS (Motor V37)
     document.getElementById('file').onchange = async (e) => {
         const files = e.target.files;
         if(files.length === 0) return;
@@ -146,7 +146,7 @@
         try {
             let urls = [];
             for(let file of files) {
-                st.innerText = "Cargando...";
+                st.innerText = "Procesando...";
                 const fd = new FormData(); fd.append("image", file);
                 const req = await fetch(`https://api.imgbb.com/1/upload?key=${K}`, {method:"POST", body:fd});
                 const res = await req.json();
@@ -163,7 +163,7 @@
         } catch(err) { alert("Error"); btn.disabled=false; }
     };
 
-    // 3. MURO CON CARRUSEL Y FLECHAS
+    // 3. MURO CLÁSICO (Con Flechas y Carrusel)
     let fNow = "Todo";
     let cache = [];
 
@@ -178,7 +178,6 @@
         pintar();
     });
 
-    // Lógica de flechas
     window.move = (id, d) => {
         const el = document.getElementById('t-'+id);
         el.scrollBy({left: d * el.offsetWidth, behavior: 'smooth'});
@@ -199,7 +198,6 @@
 
             let galeria = `<img src="${pics[0]}" style="width:100%; border-radius:15px;">`;
             
-            // Si hay más de una foto, ponemos el carrusel con flechas
             if(pics.length > 1) {
                 galeria = `
                 <div class="c-wrap">
@@ -223,7 +221,7 @@
                 <p>${p.texto}</p>
                 ${galeria}
                 <button class="like ${isLiked?'yes':''}" onclick="window.lk('${p.id}')">
-                    ${isLiked?'❤️':'🤍'} Me gusta (${likes.length})
+                    <span>${isLiked?'❤️':'🤍'}</span> Me gusta (${likes.length})
                 </button>
                 <div style="background:#f1f5f9; padding:10px; border-radius:10px;">
                     ${coms.map(c=>`<div style="font-size:12px; margin-bottom:5px;"><b>${c.autor}:</b> ${c.texto}</div>`).join('')}
@@ -236,7 +234,7 @@
         });
     }
 
-    // 4. FUNCIONES GLOBALES (PARA QUE NO SALGA X)
+    // 4. FUNCIONES GLOBALES
     window.dots = (id) => {
         const el = document.getElementById('t-'+id);
         const i = Math.round(el.scrollLeft / el.offsetWidth);
