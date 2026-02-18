@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Familia Yajure - Oficial V24</title>
+    <title>Familia Yajure - Oficial V25</title>
     <link rel="icon" type="image/png" href="https://img.icons8.com/emoji/192/house-with-garden.png">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
@@ -29,7 +29,7 @@
         .filter-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); }
 
         /* POSTS */
-        .post { background: white; border-radius: 25px; padding: 15px; margin-bottom: 25px; color: #0f172a; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .post { background: white; border-radius: 25px; padding: 15px; margin-bottom: 25px; color: #0f172a; box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative; }
         .carousel-wrapper { position: relative; margin: 10px -15px; background: #000; overflow: hidden; }
         .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
         .carousel::-webkit-scrollbar { display: none; }
@@ -43,10 +43,13 @@
         .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; }
         .dot.active { background: var(--accent-blue); }
 
-        /* BOTONES */
+        /* BOTONES PÁLPITOS Y BORRADO */
         .btn-like { background: none; border: none; font-size: 16px; cursor: pointer; padding: 5px 0; display: flex; align-items: center; gap: 8px; color: #64748b; font-weight: 800; }
         .btn-like.liked { color: #ff4757; }
-        .btn-delete { background: none; border: none; color: #ff4757; cursor: pointer; font-size: 16px; padding: 0; }
+        
+        /* PAPELERA MEJORADA */
+        .btn-delete { background: #fee2e2; color: #ef4444; border: 1px solid #fecaca; padding: 5px 8px; border-radius: 10px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .btn-delete:hover { background: #fecaca; transform: scale(1.1); }
 
         .likes-names { font-size: 11px; color: #94a3b8; margin: 5px 0 10px; font-style: italic; }
 
@@ -87,7 +90,7 @@
         </div>
 
         <div class="upload-card">
-            <select id="categoriaInput" style="width:100%; padding:10px; border-radius:10px; margin-bottom:10px;">
+            <select id="categoriaInput" style="width:100%; padding:10px; border-radius:10px; margin-bottom:10px; font-weight: 700;">
                 <option value="Familia">🏠 Familia</option>
                 <option value="Fiestas">🎉 Fiestas</option>
                 <option value="Viajes">✈️ Viajes</option>
@@ -168,7 +171,7 @@
                 <div class="post">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <span style="font-weight:800; color:#3b82f6;">👤 ${d.autor} <small style="color:#94a3b8">(${d.categoria})</small></span>
-                        ${esAdmin ? `<button class="btn-delete" onclick="window.borrarPost('${d.id}')">🗑️</button>` : ''}
+                        ${esAdmin ? `<button class="btn-delete" title="Borrar recuerdo" onclick="window.borrarPost('${d.id}')">🗑️</button>` : ''}
                     </div>
                     <p style="margin:8px 0; font-size:14px;">${d.texto}</p>
                     ${media}
@@ -198,7 +201,17 @@
         input.value = "";
     };
 
-    window.borrarPost = async (id) => { if(confirm("¿Eliminar este recuerdo?")) await deleteDoc(doc(db, "mensajes", id)); };
+    // FUNCIÓN DE BORRADO BLINDADA
+    window.borrarPost = async (id) => { 
+        if(confirm("🚨 Mi Director, ¿está seguro de borrar este recuerdo para siempre?")) {
+            try {
+                await deleteDoc(doc(db, "mensajes", id));
+                // No hace falta reload, onSnapshot pintará el muro de nuevo
+            } catch (err) {
+                alert("Hubo un error al intentar borrar: " + err.message);
+            }
+        }
+    };
 </script>
 </body>
 </html>
