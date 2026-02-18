@@ -2,101 +2,103 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Familia Yajure - Recuerdos</title>
     <link rel="icon" type="image/png" href="https://img.icons8.com/emoji/192/house-with-garden.png">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; }
-        :root { --accent-blue: #3b82f6; --dark-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); --wa-green: #25d366; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; min-height: 100vh; background: var(--dark-bg); background-attachment: fixed; color: #f8fafc; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+        :root { --accent-blue: #3b82f6; --dark-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; min-height: 100vh; background: var(--dark-bg); background-attachment: fixed; color: #f8fafc; overflow-x: hidden; }
         
-        #login-screen { position: fixed; inset: 0; background: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover; display: flex; align-items: flex-start; justify-content: center; z-index: 1000; padding-top: 100px; }
-        #login-screen::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
-        .login-card { position: relative; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15); padding: 40px 25px; border-radius: 35px; text-align: center; max-width: 320px; width: 90%; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
-        #passInput { width: 100%; padding: 18px; border: 2px solid rgba(255,255,255,0.2); border-radius: 20px; background: rgba(255,255,255,0.08); color: white; text-align: center; outline: none; margin-top: 20px; font-size: 16px; }
-        
-        #app-content { display: none; padding-bottom: 40px; }
-        header { background: rgba(15, 23, 42, 0.9); padding: 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .container { max-width: 480px; margin: auto; padding: 20px 15px; }
+        /* LOGIN */
+        #login-screen { position: fixed; inset: 0; background: #0f172a; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .login-card { background: rgba(255,255,255,0.05); padding: 40px; border-radius: 30px; text-align: center; width: 90%; max-width: 350px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+        #passInput { width: 100%; padding: 15px; border-radius: 15px; border: none; text-align: center; margin-top: 20px; font-size: 18px; font-weight: 700; }
 
-        .filter-scroll { overflow-x: auto; white-space: nowrap; padding-bottom: 10px; margin-bottom: 15px; }
-        .filter-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; margin-right: 8px; font-size: 13px; cursor: pointer; transition: 0.3s; display: inline-block; font-weight: 600; }
-        .filter-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); font-weight: 800; }
+        /* APP */
+        #app-content { display: none; padding-bottom: 50px; }
+        header { background: rgba(15, 23, 42, 0.95); padding: 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .container { max-width: 500px; margin: auto; padding: 15px; }
 
-        .upload-options { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 25px; margin-bottom: 25px; border: 1px dashed rgba(255,255,255,0.2); }
-        .category-select { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 15px; background: white; border: none; font-size: 14px; color: #1e293b; font-weight: 700; }
-        .btn-post { background: var(--accent-blue); color: white; padding: 16px; border-radius: 18px; font-weight: 700; cursor: pointer; display: block; text-align: center; margin-bottom: 10px; }
-        
-        #status-msg { text-align: center; font-size: 12px; color: #94a3b8; margin-bottom: 20px; min-height: 15px; font-weight: 800; }
+        /* FILTROS (RESTAURADOS Y SIN TEMBLORES) */
+        .filter-scroll { overflow-x: auto; white-space: nowrap; padding: 10px 0 20px; margin-bottom: 10px; }
+        .filter-scroll::-webkit-scrollbar { display: none; }
+        .filter-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 12px 22px; border-radius: 25px; margin-right: 10px; font-size: 14px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .filter-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); font-weight: 800; transform: scale(1.05); }
 
-        .post { background: white; border-radius: 28px; padding: 20px; margin-bottom: 25px; color: #1e293b; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
-        .post-author { font-weight: 800; color: var(--accent-blue); font-size: 14px; }
-        .category-badge { font-size: 10px; background: #e0f2fe; color: #0284c7; padding: 4px 8px; border-radius: 8px; font-weight: 700; margin-left: 8px; text-transform: uppercase; }
+        /* PANEL DE SUBIDA */
+        .upload-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 30px; border: 2px dashed rgba(255,255,255,0.2); margin-bottom: 30px; text-align: center; }
+        .category-select { width: 100%; padding: 15px; border-radius: 15px; background: white; color: #0f172a; font-weight: 800; border: none; margin-bottom: 15px; font-size: 14px; }
+        .btn-upload { background: var(--accent-blue); color: white; width: 100%; padding: 18px; border-radius: 20px; font-weight: 800; border: none; cursor: pointer; font-size: 15px; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
 
-        /* CARRUSEL */
-        .carousel-container { position: relative; width: calc(100% + 40px); margin-left: -20px; margin-top: 10px; margin-bottom: 10px; overflow: hidden; background: #000; }
+        #status-msg { text-align: center; font-size: 13px; color: #93c5fd; margin-bottom: 15px; font-weight: 800; }
+
+        /* POSTS Y CARRUSEL */
+        .post { background: white; border-radius: 30px; padding: 20px; margin-bottom: 30px; color: #1e293b; box-shadow: 0 15px 35px rgba(0,0,0,0.3); overflow: hidden; }
+        .post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .post-author { font-weight: 800; color: var(--accent-blue); }
+        .category-badge { font-size: 10px; background: #eff6ff; color: #3b82f6; padding: 5px 10px; border-radius: 8px; font-weight: 800; text-transform: uppercase; }
+
+        .carousel-container { position: relative; margin: 15px -20px; background: #000; overflow: hidden; }
         .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
         .carousel-track::-webkit-scrollbar { display: none; }
-        .carousel-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; object-fit: cover; aspect-ratio: 1/1; }
+        .carousel-track img { width: 100%; flex-shrink: 0; scroll-snap-align: start; aspect-ratio: 1/1; object-fit: cover; }
         
-        .carousel-dots { display: flex; justify-content: center; gap: 5px; margin: 10px 0; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; }
-        .dot.active { background: var(--accent-blue); transform: scale(1.3); }
+        .carousel-dots { display: flex; justify-content: center; gap: 6px; margin: 15px 0 5px; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; transition: 0.3s; }
+        .dot.active { background: var(--accent-blue); transform: scale(1.4); }
 
-        .btn-like { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; padding: 10px; border-radius: 12px; cursor: pointer; font-weight: 700; width: 100%; text-align: left; }
+        .btn-like { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 15px; width: 100%; font-weight: 700; color: #64748b; cursor: pointer; }
         .btn-like.liked { background: #fff5f5; color: #ff4757; border-color: #ff4757; }
-        .month-separator { background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 8px 20px; border-radius: 50px; font-size: 12px; font-weight: 800; text-align: center; margin: 30px 0 15px 0; border: 1px solid rgba(59, 130, 246, 0.3); letter-spacing: 2px; text-transform: uppercase; }
 
-        #photo-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 5000; justify-content: center; align-items: center; }
-        #modal-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .month-label { text-align: center; color: #94a3b8; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 40px 0 20px; }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
     <div class="login-card">
-        <div style="font-size: 45px; margin-bottom: 15px;">🌅</div>
-        <h2 style="color: white; margin: 0;">Familia Yajure</h2>
-        <input type="password" id="passInput" placeholder="Clave de acceso">
+        <h2 style="color:white; margin:0;">Familia Yajure</h2>
+        <p style="color:#94a3b8;">Ingresa la clave de acceso</p>
+        <input type="password" id="passInput" placeholder="Clave aquí...">
     </div>
 </div>
 
 <div id="app-content">
     <header>
-        <h1 style="font-size: 18px; margin:0; color:white;">Recuerdos</h1>
-        <button onclick="window.salirApp()" style="background:rgba(255,255,255,0.1); color:#94a3b8; border:none; padding:10px; border-radius:10px; cursor:pointer;">Salir 🔒</button>
+        <span style="font-weight: 800; color: white;">Nuestros Recuerdos</span>
+        <button onclick="window.salirSession()" style="background:none; border:none; color:#94a3b8; font-weight:700; cursor:pointer;">Cerrar 🔒</button>
     </header>
+
     <div class="container">
         <div class="filter-scroll">
-            <button class="filter-btn active" data-cat="Todo" onclick="window.filtrar('Todo')">Todo</button>
-            <button class="filter-btn" data-cat="Familia" onclick="window.filtrar('Familia')">🏠 Familia</button>
-            <button class="filter-btn" data-cat="Fiestas" onclick="window.filtrar('Fiestas')">🎉 Fiestas</button>
-            <button class="filter-btn" data-cat="Viajes" onclick="window.filtrar('Viajes')">✈️ Viajes</button>
-            <button class="filter-btn" data-cat="Recuerdos" onclick="window.filtrar('Recuerdos')">📜 Recuerdos</button>
-            <button class="filter-btn" data-cat="Jodedera" onclick="window.filtrar('Jodedera')">🤣 Jodedera</button>
+            <button class="filter-btn active" onclick="window.filtrar('Todo')">Todo</button>
+            <button class="filter-btn" onclick="window.filtrar('Familia')">🏠 Familia</button>
+            <button class="filter-btn" onclick="window.filtrar('Fiestas')">🎉 Fiestas</button>
+            <button class="filter-btn" onclick="window.filtrar('Viajes')">✈️ Viajes</button>
+            <button class="filter-btn" onclick="window.filtrar('Recuerdos')">📜 Recuerdos</button>
+            <button class="filter-btn" onclick="window.filtrar('Jodedera')">🤣 Jodedera</button>
         </div>
 
-        <div class="upload-options">
+        <div class="upload-card">
             <select id="categoriaInput" class="category-select">
-                <option value="Familia">🏠 Familia</option>
-                <option value="Fiestas">🎉 Fiestas</option>
-                <option value="Viajes">✈️ Viajes</option>
-                <option value="Recuerdos">📜 Recuerdos</option>
-                <option value="Jodedera">🤣 Jodedera</option>
+                <option value="Familia">🏠 Álbum de Familia</option>
+                <option value="Fiestas">🎉 Fiestas y Rumbas</option>
+                <option value="Viajes">✈️ Viajes Familiares</option>
+                <option value="Recuerdos">📜 Viejos Recuerdos</option>
+                <option value="Jodedera">🤣 Jodedera y Risas</option>
             </select>
-            <label for="fotoInput" class="btn-post" id="lblPost">✨ SELECCIONAR FOTOS 📸</label>
+            <button class="btn-upload" id="uploadBtn" onclick="document.getElementById('fotoInput').click()">SELECCIONAR FOTOS 📸</button>
+            <p style="color:#64748b; font-size:10px; margin-top:10px;">(Selecciona varias fotos a la vez)</p>
         </div>
 
         <div id="status-msg"></div>
         <input type="file" id="fotoInput" style="display:none;" accept="image/*" multiple>
+
         <div id="muro"></div>
     </div>
-</div>
-
-<div id="photo-modal" onclick="this.style.display='none'">
-    <img id="modal-img" src="">
 </div>
 
 <script type="module">
@@ -107,51 +109,47 @@
     const CLAVE_ADMIN = "ticoadmin2026";
     const IMGBB_KEY = "07dd4f0a1180673510c5047ae8b5eec8";
 
-    let todosLosPosts = [];
-    let filtroActual = 'Todo';
-
-    // AUTH
-    const auth = localStorage.getItem('familia_auth');
-    if(auth === CLAVE_NORMAL || auth === CLAVE_ADMIN) {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('app-content').style.display = 'block';
-    }
+    // --- ACCESO ---
+    const checkAuth = () => {
+        const auth = localStorage.getItem('familia_auth');
+        if(auth === CLAVE_NORMAL || auth === CLAVE_ADMIN) {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-content').style.display = 'block';
+        }
+    };
+    checkAuth();
 
     document.getElementById('passInput').oninput = (e) => {
         const v = e.target.value.toLowerCase();
-        if(v === CLAVE_NORMAL || v === CLAVE_ADMIN) { localStorage.setItem('familia_auth', v); location.reload(); }
+        if(v === CLAVE_NORMAL || v === CLAVE_ADMIN) {
+            localStorage.setItem('familia_auth', v);
+            location.reload();
+        }
     };
 
-    window.salirApp = () => { localStorage.removeItem('familia_auth'); location.reload(); };
+    window.salirSession = () => { localStorage.removeItem('familia_auth'); location.reload(); };
 
-    // FILTRAR (CORREGIDO SIN REBOTE)
-    window.filtrar = (cat) => {
-        filtroActual = cat;
-        const btns = document.querySelectorAll('.filter-btn');
-        btns.forEach(b => b.classList.toggle('active', b.getAttribute('data-cat') === cat));
-        pintarMuro();
-    };
-
-    // SUBIDA
+    // --- SUBIDA DE FOTOS ---
     document.getElementById('fotoInput').onchange = async (e) => {
         const files = Array.from(e.target.files);
         if(files.length === 0) return;
 
-        let nombre = localStorage.getItem('user_n') || prompt("Tu nombre:");
+        let nombre = localStorage.getItem('user_n') || prompt("Dinos tu nombre:");
         if(!nombre) return;
         localStorage.setItem('user_n', nombre);
 
         const cat = document.getElementById('categoriaInput').value;
-        const msg = prompt(`Mensaje para este álbum de ${files.length} fotos:`);
+        const msg = prompt(`¿Qué quieres decir de estas ${files.length} fotos?`);
         const status = document.getElementById('status-msg');
-        const lbl = document.getElementById('lblPost');
+        const btn = document.getElementById('uploadBtn');
 
-        lbl.innerText = "⏳ SUBIENDO...";
-        
+        btn.disabled = true;
+        btn.innerHTML = "⏳ SUBIENDO...";
+
         try {
             let urls = [];
             for(let i=0; i < files.length; i++) {
-                status.innerText = `Subiendo ${i+1}/${files.length}...`;
+                status.innerHTML = `🚀 Subiendo ${i+1} de ${files.length}...`;
                 const compressed = await compress(files[i]);
                 const fd = new FormData();
                 fd.append("image", compressed);
@@ -164,82 +162,105 @@
                 await addDoc(collection(db, "mensajes"), {
                     texto: msg || "", fotos: urls, foto: urls[0],
                     autor: nombre, categoria: cat, fecha: new Date(),
-                    likesBy: [], comentarios: []
+                    likesBy: []
                 });
-                status.innerText = "✅ ¡Listo!";
-                setTimeout(() => { status.innerText = ""; lbl.innerText = "✨ SELECCIONAR FOTOS 📸"; }, 3000);
+                status.innerHTML = "✅ ¡Álbum Publicado!";
+                setTimeout(() => { status.innerHTML = ""; btn.disabled = false; btn.innerHTML = "SELECCIONAR FOTOS 📸"; }, 3000);
             }
-        } catch(err) { alert("Error"); lbl.innerText = "✨ SELECCIONAR FOTOS 📸"; }
+        } catch(err) { alert("Error"); btn.disabled = false; }
     };
 
     async function compress(file) {
         return new Promise(res => {
             const r = new FileReader(); r.readAsDataURL(file);
-            r.onload = e => {
-                const img = new Image(); img.src = e.target.result;
+            r.onload = ev => {
+                const img = new Image(); img.src = ev.target.result;
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
                     const MAX = 1200;
                     let w = img.width, h = img.height;
                     if(w > MAX) { h *= MAX/w; w = MAX; }
                     canvas.width = w; canvas.height = h;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, w, h);
+                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
                     canvas.toBlob(blob => res(blob), 'image/jpeg', 0.8);
                 }
             }
         });
     }
 
-    // MURO
-    onSnapshot(query(collection(db, "mensajes"), orderBy("fecha", "desc")), (snap) => {
-        todosLosPosts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // --- MURO Y FILTROS ---
+    let filtroActual = "Todo";
+    let cachePosts = [];
+
+    window.filtrar = (cat) => {
+        filtroActual = cat;
+        // Actualizar botones visualmente sin recargar
+        const btns = document.querySelectorAll('.filter-btn');
+        btns.forEach(b => {
+            b.classList.toggle('active', b.innerText.includes(cat) || (cat==='Todo' && b.innerText==='Todo'));
+        });
+        pintarMuro();
+    };
+
+    onSnapshot(query(collection(db, "mensajes"), orderBy("fecha", "desc")), snap => {
+        cachePosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
         pintarMuro();
     });
 
     function pintarMuro() {
         const muro = document.getElementById('muro');
         muro.innerHTML = "";
-        let uMes = "";
-        const esAdmin = localStorage.getItem('familia_auth') === CLAVE_ADMIN;
+        let ultimoMes = "";
         const miNombre = localStorage.getItem('user_n');
+        const esAdmin = localStorage.getItem('familia_auth') === CLAVE_ADMIN;
 
-        const filtrados = todosLosPosts.filter(p => filtroActual === 'Todo' || p.categoria === filtroActual);
+        const posts = cachePosts.filter(p => filtroActual === "Todo" || p.categoria === filtroActual);
 
-        filtrados.forEach(data => {
-            const fecha = data.fecha ? data.fecha.toDate() : new Date();
-            const mes = fecha.toLocaleDateString('es',{month:'long', year:'numeric'});
-            if(mes !== uMes) { muro.innerHTML += `<div class="month-separator">${mes}</div>`; uMes = mes; }
+        if(posts.length === 0) {
+            muro.innerHTML = `<p style="text-align:center; color:#94a3b8; padding-top:20px;">No hay recuerdos en "${filtroActual}".</p>`;
+            return;
+        }
 
-            const fotos = data.fotos || [data.foto];
-            let mediaHtml = "";
+        posts.forEach(d => {
+            const fecha = d.fecha ? d.fecha.toDate() : new Date();
+            const mesStr = fecha.toLocaleDateString('es', { month: 'long', year: 'numeric' });
+            if(mesStr !== ultimoMes) {
+                muro.innerHTML += `<div class="month-label">${mesStr}</div>`;
+                ultimoMes = mesStr;
+            }
+
+            const fotos = d.fotos || [d.foto];
+            let visualHtml = "";
             let dotsHtml = "";
 
             if(fotos.length > 1) {
-                mediaHtml = `<div class="carousel-container"><div class="carousel-track" id="track-${data.id}" onscroll="window.updateDots('${data.id}')">${fotos.map(f => `<img src="${f}" onclick="window.abrirLupa('${f}')">`).join('')}</div></div>`;
-                dotsHtml = `<div class="carousel-dots" id="dots-${data.id}">${fotos.map((_,i)=>`<div class="dot ${i===0?'active':''}"></div>`).join('')}</div>`;
+                visualHtml = `<div class="carousel-container"><div class="carousel-track" id="track-${d.id}" onscroll="window.handleScroll('${d.id}')">${fotos.map(f => `<img src="${f}">`).join('')}</div></div>`;
+                dotsHtml = `<div class="carousel-dots" id="dots-${d.id}">${fotos.map((_,i) => `<div class="dot ${i===0?'active':''}"></div>`).join('')}</div>`;
             } else {
-                mediaHtml = `<img src="${fotos[0]}" onclick="window.abrirLupa('${fotos[0]}')" style="width:100%; border-radius:20px; margin:10px 0; aspect-ratio:1/1; object-fit:cover;">`;
+                visualHtml = `<img src="${fotos[0]}" style="width:100%; border-radius:20px; margin-top:10px; aspect-ratio:1/1; object-fit:cover;">`;
             }
 
             muro.innerHTML += `
                 <div class="post">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <span class="post-author">👤 ${data.autor} <span class="category-badge">${data.categoria}</span></span>
-                        ${esAdmin ? `<button onclick="window.borrarPost('${data.id}')" style="background:none; border:none; color:red; font-weight:800; cursor:pointer;">🗑️</button>` : ""}
+                    <div class="post-header">
+                        <span class="post-author">👤 ${d.autor} <span class="category-badge">${d.categoria}</span></span>
+                        ${esAdmin ? `<button onclick="window.borrarPost('${d.id}')" style="background:none; border:none; color:red; font-size:11px; cursor:pointer; font-weight:800;">🗑️ BORRAR</button>` : ''}
                     </div>
-                    <p>${data.texto}</p>
-                    ${mediaHtml}${dotsHtml}
-                    <button class="btn-like ${data.likesBy?.includes(miNombre)?'liked':''}" onclick="window.darLike('${data.id}')">❤️ Me gusta (${data.likesBy?.length || 0})</button>
-                    <div style="font-size:11px; color:#64748b; margin-top:8px;">${data.likesBy?.length > 0 ? 'A ' + data.likesBy.join(', ') + ' les gusta.' : ''}</div>
+                    <p style="margin:5px 0 10px; line-height:1.4; font-size:14px;">${d.texto}</p>
+                    ${visualHtml}${dotsHtml}
+                    <button class="btn-like ${d.likesBy?.includes(miNombre)?'liked':''}" onclick="window.darLike('${d.id}')">
+                        ❤️ ${d.likesBy?.includes(miNombre) ? 'Te gusta' : 'Me gusta'} (${d.likesBy?.length || 0})
+                    </button>
+                    <div style="font-size:11px; color:#94a3b8; margin-top:10px;">
+                        ${d.likesBy?.length > 0 ? 'A ' + d.likesBy.join(', ') + ' les gusta esto.' : ''}
+                    </div>
                 </div>`;
         });
     }
 
-    window.updateDots = (id) => {
-        const t = document.getElementById('track-'+id);
-        if(!t) return;
-        const idx = Math.round(t.scrollLeft / t.offsetWidth);
+    window.handleScroll = (id) => {
+        const track = document.getElementById('track-'+id);
+        const idx = Math.round(track.scrollLeft / track.offsetWidth);
         const dots = document.getElementById('dots-'+id).querySelectorAll('.dot');
         dots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
     };
@@ -253,8 +274,7 @@
         else await updateDoc(ref, { likesBy: arrayUnion(n) });
     };
 
-    window.abrirLupa = (u) => { document.getElementById('modal-img').src = u; document.getElementById('photo-modal').style.display='flex'; };
-    window.borrarPost = async (id) => { if(confirm("¿Borrar?")) await deleteDoc(doc(db, "mensajes", id)); };
+    window.borrarPost = async (id) => { if(confirm("¿Borrar para siempre?")) await deleteDoc(doc(db, "mensajes", id)); };
 </script>
 </body>
 </html>
